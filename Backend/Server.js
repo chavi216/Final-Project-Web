@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors'; // 1. ייבוא של ספריית ה-cors
 
 import adminRoutes from './routes/adminRoutes.js'; 
 import nutritionistRoutes from './Routes/nutritionistRoutes.js';
@@ -7,10 +8,10 @@ import trainerRoutes from './routes/trainerRoutes.js';
 import clientRoutes from './routes/clientRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 
-
-
 dotenv.config();
 const app = express();
+
+app.use(cors()); // 2. הפעלת CORS (מאשר לכל פורט חיצוני, כמו ה-React שלך, לגשת ל-API)
 app.use(express.json());
 
 app.use('/api/admin', adminRoutes);
@@ -19,10 +20,10 @@ app.use('/api/trainer', trainerRoutes);
 app.use('/api/client', clientRoutes);
 app.use('/api/auth', authRoutes);
 
-
 app.get('/', (req, res) => {
     res.send('Server is up and running!');
 });
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`🚀 Server is running on http://localhost:${PORT}`);

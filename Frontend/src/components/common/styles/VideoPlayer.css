@@ -1,0 +1,35 @@
+.video-player-container {
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+  direction: rtl;
+}
+
+.video-title {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.main-video-player {
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  background-color: #000;
+}
+
+.no-video {
+  color: #777;
+  font-style: italic;
+  text-align: center;
+  padding: 10px;
+}

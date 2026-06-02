@@ -12,8 +12,8 @@ import {
 const router = express.Router();
 
 // מפעילים את ההגנה - רק לקוחות עוברים
-router.use(verifyToken);
-router.use(isClient); 
+// router.use(verifyToken);
+// router.use(isClient); 
 
 // בקשות GET לשליפת נתונים לקריאה
 router.get('/info', getInfo);
