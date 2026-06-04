@@ -21,6 +21,16 @@ const Sidebar = () => {
             <li><NavLink to="/client/tasks" className={({ isActive }) => isActive ? 'active' : ''}>משימות ואימונים</NavLink></li>
             <li><NavLink to="/client/food-plan" className={({ isActive }) => isActive ? 'active' : ''}>תוכנית תזונה</NavLink></li>
             <li><NavLink to="/client/messages" className={({ isActive }) => isActive ? 'active' : ''}>הודעות וצ'אט</NavLink></li>
+            <li>
+          <NavLink to="/client/videos" className={({ isActive }) => isActive ? 'active-link' : ''}>
+            סרטוני כושר 🎥
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/client/blogs" className={({ isActive }) => isActive ? 'active-link' : ''}>
+            בלוגים ומאמרים 📖
+          </NavLink>
+        </li>
           </>
         )}
 

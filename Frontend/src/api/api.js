@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:5000/api'; // שנו את הפורט בהתאם לפורט של שרת ה-Node.js שלכם
+const BASE_URL = 'http://localhost:3000/api'; // שנו את הפורט בהתאם לפורט של שרת ה-Node.js שלכם
 
 // פונקציית עזר להוצאת בקשות חלקה עם כפתור אימות (Token)
 const fetchWithErrorHandling = async (endpoint, options = {}) => {
@@ -43,7 +43,8 @@ export const apiService = {
       body: JSON.stringify({ completed }),
     }),
     getFoodPlan: () => fetchWithErrorHandling('/client/food-plan'),
+    getVideos: () => fetchWithErrorHandling('/client/videos'),
+    getBlogs: () => fetchWithErrorHandling('/client/blogs'),
   },
 
-  // כאן בהמשך נוסיף את קריאות ה-trainer, nutritionist ו-admin...
 };

@@ -42,3 +42,30 @@
   color: white;
   font-weight: bold;
 }
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    padding: 10px;
+  }
+  .sidebar-menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+  .sidebar-menu li {
+    flex: 1 1 auto;
+  }
+  .sidebar-menu li a {
+    padding: 8px 10px;
+    font-size: 13px;
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+@media (max-width: 480px) {
+  .sidebar-menu li {
+    flex: 1 1 100%;
+  }
+}

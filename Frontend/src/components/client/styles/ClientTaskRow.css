@@ -59,3 +59,23 @@
 .task-completed .task-body-text {
   color: #bdc3c7;
 }
+@media (max-width: 768px) {
+  .profile-card {
+    max-width: 100%;
+  }
+  .food-plan-container {
+    overflow-x: auto;
+    padding: 15px 10px;
+  }
+  .food-table th, .food-table td {
+    padding: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .task-row {
+    padding: 10px;
+  }
+  .task-title {
+    font-size: 15px;
+  }
+}

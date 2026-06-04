@@ -1,19 +1,97 @@
 import React from 'react';
-import { AuthProvider } from './context/AuthContext'; // ייבוא ה-Provider הפיקסלי של האימות
-import TestClientPage from './pages/Client/TestClientPage';
+import { Routes, Route, Navigate } from 'react-router-dom'; 
+
+// ייבוא ה-Context
+import { AuthProvider } from './context/AuthContext'; 
+
+// ייבוא קומפוננטות ניווט ותשתית
 import Navbar from './components/common/Navbar';
+import Sidebar from './components/common/Sidebar';
+import ProtectedRoute from './components/common/ProtectedRoute';
+
+// ייבוא עמודים
+import TestClientPage from './pages/Client/TestClientPage';
+import LoginPage from './pages/Login';
+import ClientVideosPage from './pages/Client/ClientVideosPage'; // עמוד סרטונים ללקוח
+import ClientBlogsPage from './pages/Client/ClientBlogsPage'; // עמוד בלוגים ללקוח
+
+// עיצוב גלובלי
 import './App.css';
 
 function App() {
   return (
-    // עטיפת כל האפליקציה ב-AuthProvider כדי ש-Navbar וכל שאר המסכים יקבלו גישה ל-user
+    // עוטפים הכל ב-Provider כדי שכל האפליקציה תכיר את המשתמש
     <AuthProvider>
       <div className="app-container">
+        {/* הניווט העליון מופיע תמיד */}
         <Navbar />
-        <main style={{ padding: '20px' }}>
-          {/* תצוגת עמוד הבדיקה הנוכחי */}
-          <TestClientPage />
-        </main>
+        
+        {/* מבנה של עמודת צד (Sidebar) ותוכן מרכזי */}
+        <div className="main-layout" style={{ display: 'flex', minHeight: '100vh' }}>
+          <Sidebar />
+          
+          <main style={{ flex: 1, padding: '20px', backgroundColor: '#f5f5f5' }}>
+            <Routes>
+              {/* נתיבים ציבוריים - ללא הגנה */}
+              <Route path="/login" element={<LoginPage />} />
+              
+              {/* נתיבים מוגנים ללקוח (Client) */}
+              <Route 
+                path="/client/dashboard" 
+                element={
+                  <ProtectedRoute allowedRoles={['client']}>
+                    <TestClientPage />
+                  </ProtectedRoute>
+                } 
+              />
+
+             <Route 
+                path="/client/tasks" 
+                element={
+                  <ProtectedRoute allowedRoles={['client']}>
+                    <div style={{ padding: '20px' }}>
+                      <h2>כאן יהיה עמוד המשימות המלא</h2>
+                      {/* בהמשך נעביר לפה את ClientTaskRow */}
+                    </div>
+                  </ProtectedRoute>
+                } 
+              />
+
+              <Route 
+                path="/client/food-plan" 
+                element={
+                  <ProtectedRoute allowedRoles={['client']}>
+                    <div style={{ padding: '20px' }}>
+                      <h2>כאן יהיה עמוד התזונה המלא</h2>
+                      {/* בהמשך נעביר לפה את FoodPlanDayTable */}
+                    </div>
+                  </ProtectedRoute>
+                } 
+              />
+
+              <Route 
+                path="/client/videos" 
+                element={
+                  <ProtectedRoute allowedRoles={['client']}>
+                    <ClientVideosPage />
+                  </ProtectedRoute>
+                } 
+              />
+
+              <Route 
+                path="/client/blogs" 
+                element={
+                  <ProtectedRoute allowedRoles={['client']}>
+                    <ClientBlogsPage />
+                  </ProtectedRoute>
+                } 
+              />
+              
+              {/* ניתוב ברירת מחדל - אם המשתמש מגיע לנתיב לא קיים או לנתיב הראשי (/) */}
+              <Route path="*" element={<Navigate to="/client/dashboard" replace />} />
+            </Routes>
+          </main>
+        </div>
       </div>
     </AuthProvider>
   );

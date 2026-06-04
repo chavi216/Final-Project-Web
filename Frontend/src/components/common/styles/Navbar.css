@@ -46,3 +46,16 @@
   text-decoration: none;
   font-weight: 500;
 }
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 10px;
+  }
+  .user-welcome {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .navbar-logo a {
+    font-size: 16px;
+  }
+}
