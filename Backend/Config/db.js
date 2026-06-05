@@ -6,7 +6,7 @@ dotenv.config();
 const db = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'Mysql2026@',
+    password: 'nhfkxdk20',
     database: 'lifestyle_db'
 });
 console.log("DB_USER:", process.env.DB_USER);

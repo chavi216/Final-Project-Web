@@ -54,8 +54,7 @@ export const login = async (req, res) => {
 export const registerUser = async (req, res) => {
     try {
         const userData = req.body;
-        
-        // 🌟 שינוי מ-authService.registerUser ל-authService.register כדי להתאים לסרוויס שלך!
+        // קריאה לפונקציה שזה עתה הוספנו בסרוויס
         const newUser = await authService.register(userData);
         
         res.status(201).json({
