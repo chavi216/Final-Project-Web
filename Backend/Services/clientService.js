@@ -1,5 +1,6 @@
 import * as clientModel from '../models/clientModel.js';
 import * as sharedModel from '../models/sharedModel.js'; 
+import * as messageModel from '../models/clientModel.js';
 
 export const handleGetClientInfo = async (client_ID) => {
     return await clientModel.getClientInfoFromDB(client_ID);
@@ -28,4 +29,9 @@ export const handleSendMessage = async (messageData) => {
         throw new Error('Message body and to_ID are required');
     }
     return await sharedModel.createMessageInDB(messageData);
+};
+
+export const handleGetMessages = async (clientId, contactId) => {
+    // כאן אפשר להוסיף לוגיקה עסקית - למשל, בדיקה אם contactId הוא באמת איש צוות
+    return await messageModel.fetchChatHistory(clientId, contactId);
 };

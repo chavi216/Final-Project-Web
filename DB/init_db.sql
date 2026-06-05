@@ -42,7 +42,8 @@ CREATE TABLE IF NOT EXISTS Messages (
     body TEXT,
     is_read BOOLEAN,
     FOREIGN KEY (from_ID) REFERENCES Users(ID),
-    FOREIGN KEY (to_ID) REFERENCES Users(ID)
+    FOREIGN KEY (to_ID) REFERENCES Users(ID),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- יצירת טבלת מעקב תזונה 

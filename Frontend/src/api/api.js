@@ -36,7 +36,7 @@ export const apiService = {
     }),
   },
 
-  client: {
+ client: {
     getInfo: () => fetchWithErrorHandling('/client/info'),
     getTasks: () => fetchWithErrorHandling('/client/tasks'),
     toggleTask: (taskId, completed) => fetchWithErrorHandling(`/client/tasks/${taskId}`, {
@@ -52,5 +52,8 @@ export const apiService = {
       body: JSON.stringify(messageData),
     }),
     getContacts: () => fetchWithErrorHandling('/client/contacts'),
+    
+    // 🌟 כאן התיקון: הוספת הפונקציה שמושכת את ההודעות לפי ID של איש קשר
+    getMessages: (contactId) => fetchWithErrorHandling(`/client/messages/${contactId}`),
   },
 };

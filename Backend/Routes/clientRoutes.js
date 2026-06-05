@@ -5,7 +5,8 @@ import {
     getVideos, 
     getBlogs, 
     getFoodPlan, 
-    getTasks, // <-- הוספנו את הייבוא של פונקציית שליפת המשימות
+    getTasks,
+    getMessages,
     updateTask, 
     sendMessage 
 } from '../controllers/clientController.js';
@@ -25,5 +26,6 @@ router.get('/tasks', getTasks);
 router.put('/tasks/:id', updateTask);
 
 router.post('/messages', sendMessage);
+router.get('/messages/:contactId', getMessages);
 
 export default router;

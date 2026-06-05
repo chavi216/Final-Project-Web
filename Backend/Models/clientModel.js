@@ -29,3 +29,13 @@ export const updateTaskCompletionInDB = async (Task_ID, client_ID, completed) =>
     const [result] = await db.query(query, [completed, Task_ID, client_ID]);
     return result;
 };
+
+export const fetchChatHistory = async (clientId, contactId) => {
+    const [messages] = await db.query(
+        `SELECT * FROM Messages 
+         WHERE (from_ID = ? AND to_ID = ?) OR (from_ID = ? AND to_ID = ?) 
+         ORDER BY created_at ASC`,
+        [clientId, contactId, contactId, clientId]
+    );
+    return messages;
+};

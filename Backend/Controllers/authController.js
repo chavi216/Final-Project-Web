@@ -9,7 +9,8 @@ export const login = async (req, res) => {
             message: 'Login successful', 
             token: loginData.token,
             role: loginData.role,
-            name: loginData.name 
+            name: loginData.name,
+            id: loginData.id
         });
     } catch (error) {
         res.status(401).json({ error: error.message });
@@ -25,7 +26,8 @@ export const registerUser = async (req, res) => {
             message: 'User registered successfully',
             token: newUserData.token,
             role: newUserData.role,
-            name: newUserData.name
+            name: newUserData.name,
+            id: newUserData.id
         });
     } catch (error) {
         res.status(400).json({ error: error.message });

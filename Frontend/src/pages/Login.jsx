@@ -19,13 +19,20 @@ const Login = () => {
     setError("");
     setLoading(true);
 
-    try {
+   try {
       const response = await apiService.auth.login({ email, password });
+      localStorage.setItem('userID', response.id);
+      
+      // 🌟 התיקון: שמירה ב-localStorage
+      if (response.id) { // וודאי שהשרת מחזיר id
+        localStorage.setItem('userID', response.id);
+      }
       
       login({
         token: response.token,
         role: response.role,
-        name: response.name
+        name: response.name,
+        id: response.id // כדאי להעביר גם ל-context
       });
 
       if (response.role === "client") {

@@ -19,7 +19,7 @@ export const authenticateUser = async (email, password) => {
         process.env.JWT_SECRET,
         { expiresIn: '1h' }
     );
-    return { token, role: user.role, name: user.name }; 
+    return { token, role: user.role, name: user.name, id: user.ID }; 
 };
 
 
@@ -48,6 +48,7 @@ export const register = async (userData) => {
     return {
         token,
         role: finalUserData.role || 'client',
-        name: finalUserData.name
+        name: finalUserData.name,
+        id: finalUserData.ID
     };
 };

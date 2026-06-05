@@ -69,3 +69,15 @@ export const sendMessage = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+export const getMessages = async (req, res) => {
+    try {
+        const { contactId } = req.params;
+        const clientId = req.user.id; 
+        
+        const messages = await clientService.handleGetMessages(clientId, contactId);
+        res.status(200).json(messages);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
