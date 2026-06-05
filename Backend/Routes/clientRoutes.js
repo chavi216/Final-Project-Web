@@ -16,17 +16,14 @@ const router = express.Router();
 router.use(verifyToken);
 router.use(isClient); 
 
-// בקשות GET לשליפת נתונים לקריאה
 router.get('/info', getInfo);
 router.get('/videos', getVideos);
 router.get('/blogs', getBlogs);
 router.get('/food-plan', getFoodPlan);
-router.get('/tasks', getTasks); // <-- התוספת החשובה! בלעדיה הפרונטאנד יקרוס ויחזיר 404 על המשימות
+router.get('/tasks', getTasks); 
 
-// בקשת PUT לעדכון משימה (סיום אימון)
 router.put('/tasks/:id', updateTask);
 
-// בקשת POST לשליחת הודעה למאמן או לתזונאי
 router.post('/messages', sendMessage);
 
 export default router;

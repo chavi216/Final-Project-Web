@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext"; 
 import { apiService } from "../api/api";
 import Input from "../components/common/Input";
 import Button from "../components/common/Button";
@@ -18,6 +19,8 @@ const Register = () => {
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
+    
+    const { login } = useContext(AuthContext); 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,17 +37,24 @@ const Register = () => {
         setLoading(true);
 
         try {
-            // הוספת התפקיד (role) של המשתמש כברירת מחדל ישירות לקריאת ה-API
-            await apiService.auth.register({
+            const response = await apiService.auth.register({
                 ...formData,
-                ID: parseInt(formData.ID), // המרת ה-ID למספר שלם
-                role: "client"              // 🌟 הוספת השדה החסר עבור ה-MySQL!
+                ID: parseInt(formData.ID), 
+                role: "client" 
             });
 
-            setSuccess("ההרשמה בוצעה בהצלחה! מעביר אותך למסך ההתחברות...");
+            login({
+                token: response.token,
+                role: response.role,
+                name: response.name
+            });
+
+            setSuccess("ההרשמה בוצעה בהצלחה! מנתב אותך ישירות לדשבורד...");
+            
             setTimeout(() => {
-                navigate("/login");
-            }, 2500);
+                navigate("/client/dashboard");
+            }, 1000); 
+
         } catch (err) {
             setError(err.message || "נכשלה ההרשמה. ודא כי ה-ID או האימייל אינם קיימים כבר במערכת.");
         } finally {
@@ -122,7 +132,7 @@ const Register = () => {
 
                 <div style={{ marginTop: "20px" }}>
                     <Button type="submit" disabled={loading}>
-                        {loading ? "מבצע הרשמה..." : "הרשם ומסגר"}
+                        {loading ? "מבצע הרשמה..." : "הרשם והיכנס למערכת"}
                     </Button>
                 </div>
             </form>

@@ -6,10 +6,8 @@ const FoodPlanDayTable = ({ foodLogs }) => {
     return <p className="no-plan-message">לא קיימת תוכנית תזונה מוגדרת לתאריך זה.</p>;
   }
 
-  // חישוב סך הכל הקלוריות לתוכנית המוצגת
   const totalCalories = foodLogs.reduce((sum, item) => sum + (item.calories || 0), 0);
 
-  // פורמט תאריך קריא מהרשומה הראשונה
   const formattedDate = new Date(foodLogs[0].date).toLocaleDateString('he-IL');
 
   return (

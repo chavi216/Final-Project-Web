@@ -3,7 +3,7 @@ import * as trainerService from '../services/trainerService.js';
 export const uploadVideo = async (req, res) => {
     try {
         const videoData = {
-            From_ID: req.user.ID, // ה-ID של המאמן
+            From_ID: req.user.ID, 
             ...req.body
         };
         await trainerService.handleAddVideo(videoData);
@@ -66,7 +66,7 @@ export const createBlog = async (req, res) => {
 export const assignTask = async (req, res) => {
     try {
         const taskData = {
-            manager_ID: req.user.ID, // ה-ID של המאמן המחובר
+            manager_ID: req.user.ID, 
             ...req.body
         };
         await trainerService.handleAssignTask(taskData);

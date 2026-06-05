@@ -1,7 +1,6 @@
 import db from '../config/db.js';
 
 export const createVideoInDB = async (videoData) => {
-    // To_ID יכול להיות ה-ID של הלקוח (לסרטון אישי) או null (לסרטון כללי)
     const { From_ID, To_ID, title, video_url } = videoData;
     const query = `INSERT INTO FitnessVideos (From_ID, To_ID, title, video_url) VALUES (?, ?, ?, ?)`;
     const [result] = await db.query(query, [From_ID, To_ID || null, title, video_url]);
@@ -20,7 +19,6 @@ export const deleteVideoFromDB = async (video_ID) => {
     return result;
 };
 
-// מעקב לקוח - שליפת המשימות/אימונים של הלקוח
 export const getClientTasksFromDB = async (client_ID) => {
     const query = `SELECT * FROM Tasks WHERE client_ID = ?`;
     const [rows] = await db.query(query, [client_ID]);

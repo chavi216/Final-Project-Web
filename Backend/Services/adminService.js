@@ -2,28 +2,23 @@ import bcrypt from 'bcrypt';
 import * as adminModel from '../Models/userModel.js';
 
 export const registerUser = async (userData) => {
-    // 1. בדיקת תפקיד
     const validRoles = ['client', 'admin', 'trainer', 'nutritionist'];
     if (!validRoles.includes(userData.role)) {
         throw new Error('Invalid user role provided');
     }
 
-    // 2. מוודאים שיש סיסמה
     if (!userData.password) {
         throw new Error('Password is required');
     }
 
-    // 3. הצפנת הסיסמה! (החלק שהיה חסר)
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(userData.password, saltRounds);
 
-    // 4. יצירת אובייקט חדש שהסיסמה בו היא מוצפנת
     const securedUserData = {
         ...userData,
         password: hashedPassword
     };
     
-    // 5. שליחה למסד הנתונים של האובייקט המאובטח
     return await adminModel.createUserInDB(securedUserData);
 };
 

@@ -1,5 +1,5 @@
 import * as trainerModel from '../models/trainerModel.js';
-import * as sharedModel from '../models/sharedModel.js'; // מיחזור קוד מושלם
+import * as sharedModel from '../models/sharedModel.js'; 
 
 export const handleAddVideo = async (videoData) => {
     if (!videoData.title || !videoData.video_url) {
@@ -24,7 +24,6 @@ export const handleTrackClient = async (client_ID) => {
     return await trainerModel.getClientTasksFromDB(client_ID);
 };
 
-// שימוש חוזר בפונקציות המשותפות!
 export const handleSendMessage = async (messageData) => {
     if (!messageData.to_ID || !messageData.body) {
         throw new Error('Message body and to_ID are required');

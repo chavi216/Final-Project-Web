@@ -4,7 +4,7 @@ export const createFoodPlan = async (req, res) => {
     try {
         const planData = {
             ...req.body,
-            From_ID: req.user.ID // מזהה התזונאית לטבלת תזונה
+            From_ID: req.user.ID 
         };
         await nutritionistService.handleCreateFoodPlan(planData);
         res.status(201).json({ message: 'Food plan created successfully' });
@@ -47,7 +47,7 @@ export const trackClient = async (req, res) => {
 export const sendMessage = async (req, res) => {
     try {
         const messageData = { 
-            from_ID: req.user.ID, // מזהה התזונאית לטבלת הודעות
+            from_ID: req.user.ID, 
             ...req.body 
         };
         await nutritionistService.handleSendMessage(messageData);
@@ -60,7 +60,7 @@ export const sendMessage = async (req, res) => {
 export const createBlog = async (req, res) => {
     try {
         const blogData = { 
-            User_ID: req.user.ID, // מזהה התזונאית לטבלת בלוגים
+            User_ID: req.user.ID, 
             ...req.body 
         };
         await nutritionistService.handleCreateBlog(blogData);
@@ -73,7 +73,7 @@ export const createBlog = async (req, res) => {
 export const assignTask = async (req, res) => {
     try {
         const taskData = {
-            manager_ID: req.user.ID, // ה-ID של התזונאי המחובר
+            manager_ID: req.user.ID, 
             ...req.body
         };
         await nutritionistService.handleAssignTask(taskData);

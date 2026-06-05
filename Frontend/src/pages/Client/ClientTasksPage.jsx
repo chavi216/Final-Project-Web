@@ -1,0 +1,67 @@
+import React, { useEffect, useState } from 'react';
+import { apiService } from '../../api/api';
+import ClientTaskRow from '../../components/client/ClientTaskRow';
+
+const ClientTasksPage = () => {
+  const [tasks, setTasks] = useState([]);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadTasks = async () => {
+      try {
+        const data = await apiService.client.getTasks();
+        setTasks(data);
+      } catch (err) {
+        setError(err.message || 'נכשלה טעינת המשימות');
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadTasks();
+  }, []);
+
+  const handleToggleTask = async (taskId, currentStatus) => {
+    try {
+      // הפיכת הסטטוס הנוכחי (אם זה 1 יהפוך ל-0, ואם 0 ל-1)
+      const newStatus = currentStatus === 1 ? 0 : 1;
+      
+      // עדכון במסד הנתונים דרך השרת
+      await apiService.client.updateTask(taskId, { completed: newStatus });
+      
+      // עדכון הסטייט המקומי כדי שהצ'קבוקס ישתנה מיד במסך
+      setTasks(prevTasks =>
+        prevTasks.map(task =>
+          task.Task_ID === taskId ? { ...task, completed: newStatus } : task
+        )
+      );
+    } catch (err) {
+      alert('נכשל עדכון סטטוס המשימה: ' + err.message);
+    }
+  };
+
+  if (loading) return <div style={{ padding: '20px', textAlign: 'center' }}>טוען משימות...</div>;
+  if (error) return <div style={{ color: 'red', padding: '20px' }}>שגיאה: {error}</div>;
+
+  return (
+    <div style={{ padding: '30px', maxWidth: '800px', margin: '0 auto' }}>
+      <h2>🏋️‍♂️ המשימות והאימונים שלי</h2>
+      <hr />
+      <div style={{ marginTop: '20px' }}>
+        {tasks.length === 0 ? (
+          <p>אין לך משימות פתוחות להיום. עבודה טובה!</p>
+        ) : (
+          tasks.map(task => (
+            <ClientTaskRow 
+              key={task.Task_ID} 
+              task={task} 
+              onToggleComplete={handleToggleTask} 
+            />
+          ))
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ClientTasksPage;

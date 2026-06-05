@@ -1,6 +1,5 @@
 import db from '../config/db.js';
 
-// רישום משתמש
 export const createUserInDB = async (userData) => {
     const { ID, name, email, password, role, address, phone_number } = userData;
     const query = `INSERT INTO Users (ID, name, email, password, role, address, phone_number) VALUES (?, ?, ?, ?, ?, ?, ?)`;
@@ -8,21 +7,18 @@ export const createUserInDB = async (userData) => {
     return result;
 };
 
-// מחיקת משתמש
 export const deleteUserFromDB = async (userId) => {
     const query = `DELETE FROM Users WHERE ID = ?`;
     const [result] = await db.query(query, [userId]);
     return result;
 };
 
-// מחיקת תוכן (למשל בלוג)
 export const deleteBlogFromDB = async (blogId) => {
     const query = `DELETE FROM Blogs WHERE blog_ID = ?`;
     const [result] = await db.query(query, [blogId]);
     return result;
 };
 
-// מחיקת סרטון כושר
 export const deleteVideoFromDB = async (videoId) => {
     const query = `DELETE FROM FitnessVideos WHERE video_ID = ?`;
     const [result] = await db.query(query, [videoId]);

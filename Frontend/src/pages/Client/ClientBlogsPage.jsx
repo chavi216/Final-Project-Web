@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { apiService } from '../../api/api'; // ודאי נתיב תקין אצלך
+import { apiService } from '../../api/api'; 
 
 const ClientBlogsPage = () => {
   const [blogs, setBlogs] = useState([]);

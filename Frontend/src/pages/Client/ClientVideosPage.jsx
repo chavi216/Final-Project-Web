@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { apiService } from '../../api/api'; // ודאי נתיב תקין אצלך
-import VideoPlayer from '../../components/common/VideoPlayer'; // ודאי נתיב תקין אצלך
+import { apiService } from '../../api/api'; 
+import VideoPlayer from '../../components/common/VideoPlayer'; 
 
 const ClientVideosPage = () => {
   const [videos, setVideos] = useState([]);
