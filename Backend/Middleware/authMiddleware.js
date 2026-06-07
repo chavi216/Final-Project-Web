@@ -16,32 +16,72 @@ export const verifyToken = (req, res, next) => {
     } catch (error) {
         return res.status(401).json({ message: 'Invalid or expired token.' });
     }
+  
 };
 
+
+// export const isAdmin = (req, res, next) => {
+//     if (req.user.role !== 'admin') {
+//         return res.status(403).json({ message: 'Access denied. Admins only.' });
+//     }
+//     next();
+// };
+
+// export const isNutritionist = (req, res, next) => {
+//     if (req.user.role !== 'nutritionist' && req.user.role !== 'admin') {
+//         return res.status(403).json({ message: 'Access denied. Nutritionists only.' });
+//     }
+//     next();
+// };
+
+// export const isTrainer = (req, res, next) => {
+//     if (req.user.role !== 'trainer' && req.user.role !== 'admin') {
+//         return res.status(403).json({ message: 'Access denied. Trainers only.' });
+//     }
+//     next();
+// };
+
+// export const isClient = (req, res, next) => {
+//     if (req.user.role !== 'client' && req.user.role !== 'admin') {
+//         return res.status(403).json({ message: 'Access denied. Clients only.' });
+//     }
+//     next();
+// };
+
+
+
+// export const verifyToken = (req, res, next) => {
+//     // הזרקה זמנית כדי למנוע את ה-TypeError ב-role
+//     if (!req.user) {
+//         req.user = { id: 1, role: 'admin' }; 
+//     }
+//     next(); 
+// };
+
 export const isAdmin = (req, res, next) => {
-    if (req.user.role !== 'admin') {
+    if (!req.user || req.user.role !== 'admin') {
         return res.status(403).json({ message: 'Access denied. Admins only.' });
     }
     next();
 };
 
+export const isClient = (req, res, next) => {
+    if (!req.user || (req.user.role !== 'client' && req.user.role !== 'admin')) {
+        return res.status(403).json({ message: 'Access denied. Clients only.' });
+    }
+    next();
+};
+
 export const isNutritionist = (req, res, next) => {
-    if (req.user.role !== 'nutritionist' && req.user.role !== 'admin') {
+    if (!req.user || (req.user.role !== 'nutritionist' && req.user.role !== 'admin')) {
         return res.status(403).json({ message: 'Access denied. Nutritionists only.' });
     }
     next();
 };
 
 export const isTrainer = (req, res, next) => {
-    if (req.user.role !== 'trainer' && req.user.role !== 'admin') {
+    if (!req.user || (req.user.role !== 'trainer' && req.user.role !== 'admin')) {
         return res.status(403).json({ message: 'Access denied. Trainers only.' });
-    }
-    next();
-};
-
-export const isClient = (req, res, next) => {
-    if (req.user.role !== 'client' && req.user.role !== 'admin') {
-        return res.status(403).json({ message: 'Access denied. Clients only.' });
     }
     next();
 };

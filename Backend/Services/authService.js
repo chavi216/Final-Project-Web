@@ -11,7 +11,7 @@ export const authenticateUser = async (email, password) => {
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-        throw new Error('סיסמה שגויה, נסה שנית');
+        throw new Error('סיסמה או איימיל שגויים');
     }
 
  const token = jwt.sign(

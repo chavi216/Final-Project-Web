@@ -22,8 +22,6 @@ const Login = () => {
    try {
       const response = await apiService.auth.login({ email, password });
       localStorage.setItem('userID', response.id);
-      
-      // 🌟 התיקון: שמירה ב-localStorage
       if (response.id) { // וודאי שהשרת מחזיר id
         localStorage.setItem('userID', response.id);
       }

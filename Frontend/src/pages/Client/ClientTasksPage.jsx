@@ -23,22 +23,25 @@ const ClientTasksPage = () => {
 
   const handleToggleTask = async (taskId, currentStatus) => {
     try {
-      // הפיכת הסטטוס הנוכחי (אם זה 1 יהפוך ל-0, ואם 0 ל-1)
-      const newStatus = currentStatus === 1 ? 0 : 1;
-      
-      // עדכון במסד הנתונים דרך השרת
-      await apiService.client.updateTask(taskId, { completed: newStatus });
-      
-      // עדכון הסטייט המקומי כדי שהצ'קבוקס ישתנה מיד במסך
-      setTasks(prevTasks =>
-        prevTasks.map(task =>
-          task.Task_ID === taskId ? { ...task, completed: newStatus } : task
-        )
-      );
+        // המרה מפורשת למספר: אם זה 1 יהפוך ל-0, אחרת 1
+        const newStatus = Number(currentStatus) === 1 ? 0 : 1;
+        
+        console.log("DEBUG: Original status:", currentStatus);
+        console.log("DEBUG: Sending new status to server:", newStatus);
+
+        // שליחת הערך החדש
+        await apiService.client.toggleTask(taskId, newStatus);
+        
+        // עדכון הסטייט המקומי כדי שהצ'קבוקס יתעדכן באתר
+        setTasks(prevTasks =>
+            prevTasks.map(task =>
+                task.Task_ID === taskId ? { ...task, completed: newStatus } : task
+            )
+        );
     } catch (err) {
-      alert('נכשל עדכון סטטוס המשימה: ' + err.message);
+        alert('נכשל עדכון סטטוס המשימה: ' + err.message);
     }
-  };
+};
 
   if (loading) return <div style={{ padding: '20px', textAlign: 'center' }}>טוען משימות...</div>;
   if (error) return <div style={{ color: 'red', padding: '20px' }}>שגיאה: {error}</div>;

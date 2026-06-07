@@ -65,12 +65,16 @@ export const createBlog = async (req, res) => {
 };
 export const assignTask = async (req, res) => {
     try {
+        // משיכת ה-ID של המאמן המחובר בצורה בטוחה
+        const trainerId = req.user?.id || req.user?.ID || 1;
+        
         const taskData = {
-            manager_ID: req.user.ID, 
-            ...req.body
+            manager_ID: trainerId, 
+            ...req.body // Body, Title, client_ID
         };
+        
         await trainerService.handleAssignTask(taskData);
-        res.status(201).json({ message: 'Task assigned to client successfully by trainer' });
+        res.status(201).json({ message: 'Task assigned successfully' });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

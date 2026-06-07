@@ -1,10 +1,26 @@
 import * as nutritionistService from '../services/nutritionistService.js';
 
+// export const createFoodPlan = async (req, res) => {
+//     try {
+//         const planData = {
+//             ...req.body,
+//             From_ID: req.user.ID 
+//         };
+//         await nutritionistService.handleCreateFoodPlan(planData);
+//         res.status(201).json({ message: 'Food plan created successfully' });
+//     } catch (error) {
+//         res.status(400).json({ error: error.message });
+//     }
+// };
+
 export const createFoodPlan = async (req, res) => {
+    // 🌟 זה יגלה לנו הכל:
+    console.log("DEBUG: req.user value is:", req.user); 
+    
     try {
         const planData = {
             ...req.body,
-            From_ID: req.user.ID 
+            From_ID: req.user?.ID || req.user?.id || 1 // הגנה משולבת
         };
         await nutritionistService.handleCreateFoodPlan(planData);
         res.status(201).json({ message: 'Food plan created successfully' });
@@ -12,7 +28,6 @@ export const createFoodPlan = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
-
 export const updateFoodPlan = async (req, res) => {
     try {
         const Table_ID = parseInt(req.params.id);

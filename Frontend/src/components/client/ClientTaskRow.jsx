@@ -8,7 +8,7 @@ const ClientTaskRow = ({ task, onToggleComplete }) => {
         <input
           type="checkbox"
           checked={!!task.completed}
-          onChange={() => onToggleComplete(task.Task_ID, !task.completed)}
+onChange={() => onToggleComplete(task.Task_ID, task.completed)}
           className="task-checkbox"
           id={`task-${task.Task_ID}`}
         />

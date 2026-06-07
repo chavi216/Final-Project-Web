@@ -25,8 +25,16 @@ export const getClientFoodPlanFromDB = async (client_ID) => {
 };
 
 export const updateTaskCompletionInDB = async (Task_ID, client_ID, completed) => {
+    // הפיכה מפורשת למספר: 0 או 1
+    const val = completed ? 1 : 0; 
+    
+    // שאילתה פשוטה
     const query = `UPDATE Tasks SET completed = ? WHERE Task_ID = ? AND client_ID = ?`;
-    const [result] = await db.query(query, [completed, Task_ID, client_ID]);
+    
+    // הדפסה לדיבוג - תראי בטרמינל מה השרת באמת מנסה לעדכן
+    console.log("SQL DEBUG: Updating Task", Task_ID, "for Client", client_ID, "to", val);
+    
+    const [result] = await db.query(query, [val, Task_ID, client_ID]);
     return result;
 };
 
