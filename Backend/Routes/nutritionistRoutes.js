@@ -26,6 +26,8 @@ router.get('/track/:clientId', trackClient);
 router.post('/messages', sendMessage);
 router.get('/blogs', getBlogs);
 router.post('/blogs', createBlog);
+router.put('/blogs/:blogId', updateBlog);    
+router.delete('/blogs/:blogId', deleteBlog);
 router.get('/tasks/:clientId', getTasks);
 router.post('/tasks', addTask);
 router.put('/tasks/:taskId', updateTask);

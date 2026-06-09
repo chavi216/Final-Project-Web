@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS Users (
 
 -- יצירת טבלת בלוגים
 CREATE TABLE IF NOT EXISTS Blogs (
-    blog_ID INT PRIMARY KEY,
+    blog_ID INT PRIMARY KEY AUTO_INCREMENT,
     User_ID INT,
     Title VARCHAR(255),
     body TEXT,
