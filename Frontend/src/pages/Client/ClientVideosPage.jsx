@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { apiService } from '../../api/api'; 
 import VideoPlayer from '../../components/common/VideoPlayer'; 
 
+// מגדירים את הכתובת של השרת (Backend) שלנו
+const BASE_URL = 'http://localhost:3000';
+
 const ClientVideosPage = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,7 +34,11 @@ const ClientVideosPage = () => {
       {videos.length === 0 ? <p>אין סרטונים זמינים כרגע.</p> : 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '20px' }}>
           {videos.map(video => (
-            <VideoPlayer key={video.video_ID} url={video.video_url} title={video.title} />
+            <VideoPlayer 
+              key={video.video_ID} 
+              url={`${BASE_URL}/${video.video_url}`} 
+              title={video.title} 
+            />
           ))}
         </div>
       }

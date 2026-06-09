@@ -55,5 +55,5 @@ INSERT INTO Notifications (User_ID, Manager_ID) VALUES
 -- ===================================================
 -- סרטונים שהמאמן שיתף עם הלקוחות
 INSERT INTO FitnessVideos (From_ID, To_ID, title, video_url) VALUES
-(2, 4, 'הדרכה: איך לעשות דדליפט נכון מבלי לפצוע את הגב', 'https://www.youtube.com/watch?v=op9kVnSso6Q'),
-(2, 5, 'אימון מתיחות בוקר ל-10 דקות', 'https://www.youtube.com/watch?v=sTANio_2E0Q');
+(2, 4, 'הדרכה: איך לעשות דדליפט נכון מבלי לפצוע את הגב','uploads/videoplayback.mp4'),
+(2, 5, 'אימון מתיחות בוקר ל-10 דקות', 'https://www.youtube.com/shorts/ZLuWvjWkVCk');
