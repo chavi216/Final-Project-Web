@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Input from '../common/Input';
 import Button from '../common/Button';
-import './styles/DietPlanBuilder.css'; // ייבוא הסטייל המופרד
+import { apiService } from '../../api/api'; // הוספנו ייבוא של ה-API
+import './styles/DietPlanBuilder.css';
 
 const DietPlanBuilder = ({ clientId, onSaveSuccess }) => {
     const [foodName, setFoodName] = useState('');
@@ -25,15 +26,25 @@ const DietPlanBuilder = ({ clientId, onSaveSuccess }) => {
         setLoading(true);
 
         try {
-            console.log('שומר ארוחה למטופל:', clientId, { foodName, calories, date });
+            // קריאה לשרת עם המבנה שהמודל מצפה לו
+            await apiService.nutritionist.createFoodPlan({
+                To_ID: clientId,       // ה-ID של הלקוח
+                food: foodName,        // שם המאכל
+                calories: parseInt(calories), // המרה למספר
+                date: date             // תאריך
+            });
+
             alert('הארוחה התווספה בהצלחה לתפריט המטופל!');
             
+            // איפוס השדות לאחר הצלחה
             setFoodName('');
             setCalories('');
+            setDate('');
             
+            // רענון הנתונים אם הועברה פונקציה מהאבא
             if (onSaveSuccess) onSaveSuccess();
         } catch (err) {
-            setError('נכשל שמירת הפריט בתפריט. נסה שוב.');
+            setError(err.message || 'נכשל שמירת הפריט בתפריט. נסה שוב.');
         } finally {
             setLoading(false);
         }

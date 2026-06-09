@@ -44,3 +44,7 @@ export const handleAssignTask = async (taskData) => {
     }
     return await sharedModel.createTaskInDB(taskData);
 };
+
+export const handleGetMyClients = async (nutritionistId) => {
+    return await nutritionistModel.getMyClientsFromDB(nutritionistId);
+};

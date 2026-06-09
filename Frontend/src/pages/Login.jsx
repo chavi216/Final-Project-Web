@@ -35,8 +35,12 @@ const Login = () => {
 
       if (response.role === "client") {
         navigate("/client/dashboard");
+      } if (response.role === "client") {
+        navigate("/client/dashboard");
+      } else if (response.role === "nutritionist") {
+        navigate("/nutritionist/dashboard"); // ניתוב לאזור האישי של התזונאי
       } else {
-        setError("כרגע מערכת הבדיקה המוגנת מוגדרת עבור לקוחות בלבד.");
+        setError("סוג משתמש זה אינו נתמך במערכת.");
       }
     } catch (err) {
       setError(err.message || "אימייל או סיסמה שגויים. נסה שנית.");

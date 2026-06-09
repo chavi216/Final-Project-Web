@@ -1,5 +1,7 @@
 import express from 'express';
 import {verifyToken, isNutritionist } from '../Middleware/authMiddleware.js';
+import { getTasks, addTask, updateTask, deleteTask } from '../controllers/sharedTaskController.js';
+import { getBlogs, createBlog, updateBlog, deleteBlog } from '../controllers/sharedBlogController.js';
 import { 
     createFoodPlan, 
     updateFoodPlan, 
@@ -7,7 +9,7 @@ import {
     trackClient, 
     sendMessage, 
     assignTask,
-    createBlog 
+    getMyClients
 } from '../controllers/nutritionistController.js';
 
 const router = express.Router();
@@ -22,7 +24,13 @@ router.delete('/food-plan/:id', deleteFoodPlan);
 router.get('/track/:clientId', trackClient);
 
 router.post('/messages', sendMessage);
+router.get('/blogs', getBlogs);
 router.post('/blogs', createBlog);
-router.post('/tasks', assignTask);
+router.get('/tasks/:clientId', getTasks);
+router.post('/tasks', addTask);
+router.put('/tasks/:taskId', updateTask);
+router.delete('/tasks/:taskId', deleteTask);
+
+router.get('/clients', getMyClients);
 
 export default router;

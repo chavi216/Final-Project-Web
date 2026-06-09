@@ -8,7 +8,9 @@ import {
     getTasks,
     getMessages,
     updateTask, 
-    sendMessage 
+    sendMessage,
+    getProfessionals, 
+    updateTeam 
 } from '../controllers/clientController.js';
 
 const router = express.Router();
@@ -24,6 +26,9 @@ router.get('/food-plan', getFoodPlan);
 router.get('/tasks', getTasks); 
 
 router.put('/tasks/:id', updateTask);
+
+router.get('/professionals', getProfessionals);
+router.put('/team', updateTeam);
 
 router.post('/messages', sendMessage);
 router.get('/messages/:contactId', getMessages);

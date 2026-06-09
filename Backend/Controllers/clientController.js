@@ -99,3 +99,26 @@ export const getMessages = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+
+export const getProfessionals = async (req, res) => {
+    try {
+        const professionals = await clientService.handleGetProfessionals();
+        res.status(200).json(professionals);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+export const updateTeam = async (req, res) => {
+    try {
+        const { trainer_id, nutritionist_id } = req.body;
+        // אנו מקבלים את תעודת הזהות של הלקוח המחובר ישירות מהטוקן
+        const clientId = req.user.id; 
+        
+        await clientService.handleUpdateTeam(clientId, trainer_id, nutritionist_id);
+        res.status(200).json({ message: 'Team updated successfully' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};

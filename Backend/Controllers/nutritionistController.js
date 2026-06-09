@@ -97,3 +97,14 @@ export const assignTask = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+export const getMyClients = async (req, res) => {
+    try {
+        const nutritionistId = req.user?.ID || req.user?.id;
+        const clients = await nutritionistService.handleGetMyClients(nutritionistId);
+        res.status(200).json(clients);
+        console.log("DEBUG: Looking for clients of Nutritionist ID:", nutritionistId);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};

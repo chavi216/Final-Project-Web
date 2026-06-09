@@ -1,7 +1,14 @@
 import db from '../config/db.js';
 
+// export const getClientInfoFromDB = async (client_ID) => {
+//     const query = `SELECT ID, name, email, role, address, phone_number FROM Users WHERE ID = ?`;
+//     const [rows] = await db.query(query, [client_ID]);
+//     return rows[0];
+// };
+
 export const getClientInfoFromDB = async (client_ID) => {
-    const query = `SELECT ID, name, email, role, address, phone_number FROM Users WHERE ID = ?`;
+    // הוספנו את trainer_id ואת nutritionist_id לשורת ה-SELECT
+    const query = `SELECT ID, name, email, role, address, phone_number, trainer_id, nutritionist_id FROM Users WHERE ID = ?`;
     const [rows] = await db.query(query, [client_ID]);
     return rows[0];
 };
@@ -46,4 +53,18 @@ export const fetchChatHistory = async (clientId, contactId) => {
         [clientId, contactId, contactId, clientId]
     );
     return messages;
+};
+
+// שליפת כל אנשי המקצוע במערכת (מאמנים ותזונאים)
+export const getProfessionalsFromDB = async () => {
+    const query = `SELECT ID, name, role FROM Users WHERE role IN ('trainer', 'nutritionist')`;
+    const [rows] = await db.query(query);
+    return rows;
+};
+
+// עדכון המאמן והתזונאי של הלקוח
+export const updateClientTeamInDB = async (client_ID, trainer_id, nutritionist_id) => {
+    const query = `UPDATE Users SET trainer_id = ?, nutritionist_id = ? WHERE ID = ?`;
+    const [result] = await db.query(query, [trainer_id, nutritionist_id, client_ID]);
+    return result;
 };

@@ -16,4 +16,10 @@ export const clientApi = {
   }),
   getMessages: (contactId) => fetchWithErrorHandling(`/client/messages/${contactId}`),
   getContacts: () => fetchWithErrorHandling('/client/contacts'),
+
+  getProfessionals: () => fetchWithErrorHandling('/client/professionals'),
+  updateTeam: (teamData) => fetchWithErrorHandling('/client/team', {
+    method: 'PUT',
+    body: JSON.stringify(teamData),
+  }),
 };

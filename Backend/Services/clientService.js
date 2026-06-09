@@ -35,3 +35,11 @@ export const handleGetMessages = async (clientId, contactId) => {
     // כאן אפשר להוסיף לוגיקה עסקית - למשל, בדיקה אם contactId הוא באמת איש צוות
     return await messageModel.fetchChatHistory(clientId, contactId);
 };
+
+export const handleGetProfessionals = async () => {
+    return await clientModel.getProfessionalsFromDB();
+};
+
+export const handleUpdateTeam = async (client_ID, trainer_id, nutritionist_id) => {
+    return await clientModel.updateClientTeamInDB(client_ID, trainer_id, nutritionist_id);
+};

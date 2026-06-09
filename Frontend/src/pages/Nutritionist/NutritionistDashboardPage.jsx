@@ -1,14 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { apiService } from '../../api/api';
 
 const NutritionistDashboardPage = () => {
     const { user } = useContext(AuthContext);
+    const [stats, setStats] = useState({
+        activeClients: 0,
+        pendingTasks: 0, // יעודכן בעתיד מול השרת
+        unreadMessages: 0 // יעודכן בעתיד מול השרת
+    });
 
-    const stats = {
-        activeClients: 12,
-        pendingTasks: 4,
-        unreadMessages: 3
-    };
+    useEffect(() => {
+        const fetchDashboardData = async () => {
+            try {
+                // מושך את הלקוחות האמיתיים כדי לספור אותם
+                const clients = await apiService.nutritionist.getClients();
+                setStats(prev => ({ 
+                    ...prev, 
+                    activeClients: clients.length 
+                }));
+            } catch (error) {
+                console.error("שגיאה במשיכת נתוני דשבורד:", error);
+            }
+        };
+        fetchDashboardData();
+    }, []);
 
     return (
         <div style={{ padding: '10px' }}>

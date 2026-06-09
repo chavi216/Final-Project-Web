@@ -1,7 +1,6 @@
 CREATE DATABASE IF NOT EXISTS lifestyle_db;
 USE lifestyle_db;
 
-
 -- יצירת טבלת משתמשים
 CREATE TABLE IF NOT EXISTS Users (
     ID INT PRIMARY KEY,
@@ -10,7 +9,11 @@ CREATE TABLE IF NOT EXISTS Users (
     password VARCHAR(255), 
     role VARCHAR(50),
     address VARCHAR(255),
-    phone_number VARCHAR(20)
+    phone_number VARCHAR(20),
+    trainer_id INT DEFAULT NULL,
+    nutritionist_id INT DEFAULT NULL,
+    FOREIGN KEY (trainer_id) REFERENCES Users(ID),
+    FOREIGN KEY (nutritionist_id) REFERENCES Users(ID)
 );
 
 -- יצירת טבלת בלוגים
@@ -19,7 +22,10 @@ CREATE TABLE IF NOT EXISTS Blogs (
     User_ID INT,
     Title VARCHAR(255),
     body TEXT,
-    FOREIGN KEY (User_ID) REFERENCES Users(ID)
+    audience_type VARCHAR(50) DEFAULT 'all',
+    recipient_client_id INT DEFAULT NULL,
+    FOREIGN KEY (User_ID) REFERENCES Users(ID),
+    FOREIGN KEY (recipient_client_id) REFERENCES Users(ID)
 );
 
 -- יצירת טבלת משימות
