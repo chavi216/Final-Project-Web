@@ -24,3 +24,10 @@ export const getClientTasksFromDB = async (client_ID) => {
     const [rows] = await db.query(query, [client_ID]);
     return rows;
 };
+
+// הפונקציה החדשה למשיכת הלקוחות שמשויכים למאמן
+export const getClientsByTrainerId = async (trainerId) => {
+    const query = `SELECT ID, name, email, phone_number, address FROM Users WHERE role = 'client' AND trainer_id = ?`;
+    const [rows] = await db.query(query, [trainerId]);
+    return rows;
+};

@@ -24,6 +24,12 @@ import NutritionistClientsPage from "./pages/Nutritionist/NutritionistClientsPag
 import NutritionistTasksPage from "./pages/Nutritionist/NutritionistTasksPage";
 import NutritionistBlogsPage from "./pages/Nutritionist/NutritionistBlogsPage";
 
+//דפי מאמן
+import TrainerDashboardPage from "./pages/Trainer/TrainerDashboardPage";
+import TrainerTasksPage from "./pages/Trainer/TrainerTasksPage"; 
+import TrainerBlogsPage from "./pages/Trainer/TrainerBlogsPage";
+import TrainerVideosPage from "./pages/Trainer/TrainerVideosPage";
+
 import "./App.css";
 
 // 🌟 קומפוננטת מעטפת שמסדרת את ה-Layout רק עבור עמודים פנימיים מחוברים
@@ -145,7 +151,40 @@ function App() {
             </ProtectedRoute>
           } 
         />
-
+        {/* 🔒 נתיבים מוגנים עבור מאמן */}
+        <Route 
+  path="/trainer/videos" 
+  element={
+    <ProtectedRoute allowedRoles={["trainer"]}>
+      <DashboardLayout><TrainerVideosPage /></DashboardLayout>
+    </ProtectedRoute>
+  } 
+/>
+       
+        <Route 
+          path="/trainer/dashboard" 
+          element={
+            <ProtectedRoute allowedRoles={["trainer"]}>
+              <DashboardLayout><TrainerDashboardPage /></DashboardLayout>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/trainer/tasks" 
+          element={
+            <ProtectedRoute allowedRoles={["trainer"]}>
+              <DashboardLayout><TrainerTasksPage /></DashboardLayout>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/trainer/blogs" 
+          element={
+            <ProtectedRoute allowedRoles={["trainer"]}>
+              <DashboardLayout><TrainerBlogsPage /></DashboardLayout>
+            </ProtectedRoute>
+          } 
+        />
         {/* 🔄 ניתוב ברירת מחדל */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>

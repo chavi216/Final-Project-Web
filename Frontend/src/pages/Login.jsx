@@ -35,8 +35,9 @@ const Login = () => {
 
       if (response.role === "client") {
         navigate("/client/dashboard");
-      } if (response.role === "client") {
-        navigate("/client/dashboard");
+     } 
+     else if (response.role === 'trainer') {  // <--- את השורה הזו צריך להוסיף
+        navigate('/trainer/dashboard');
       } else if (response.role === "nutritionist") {
         navigate("/nutritionist/dashboard"); // ניתוב לאזור האישי של התזונאי
       } else {

@@ -79,3 +79,12 @@ export const assignTask = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+export const getClients = async (req, res) => {
+    try {
+        const trainerId = req.user?.id || req.user?.ID;
+        const clients = await trainerService.handleGetClients(trainerId);
+        res.status(200).json(clients);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};

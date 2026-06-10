@@ -43,3 +43,8 @@ export const handleAssignTask = async (taskData) => {
     }
     return await sharedModel.createTaskInDB(taskData);
 };
+
+export const handleGetClients = async (trainerId) => {
+    if (!trainerId) throw new Error('Trainer ID is missing');
+    return await trainerModel.getClientsByTrainerId(trainerId);
+};

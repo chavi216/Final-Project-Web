@@ -74,9 +74,10 @@ CREATE TABLE IF NOT EXISTS Notifications (
 CREATE TABLE IF NOT EXISTS FitnessVideos (
     video_ID INT PRIMARY KEY AUTO_INCREMENT,
     From_ID INT,
-    To_ID INT,
+    To_ID INT DEFAULT NULL,
     title VARCHAR(255),
     video_url VARCHAR(255),
+    audience_type VARCHAR(50) DEFAULT 'all',
     FOREIGN KEY (From_ID) REFERENCES Users(ID),
     FOREIGN KEY (To_ID) REFERENCES Users(ID)
 );
