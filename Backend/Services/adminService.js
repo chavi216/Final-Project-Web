@@ -34,6 +34,23 @@ export const removeUser = async (userId, currentAdminId) => {
     return result;
 };
 
+export const getUsersList = async () => {
+    return await adminModel.getAllUsersFromDB();
+};
+
+
+export const getContentList = async (contentType) => {
+    if (contentType === 'blog') {
+        return await adminModel.getAllBlogsFromDB();
+    } else if (contentType === 'video') {
+        return await adminModel.getAllVideosFromDB();
+    } else if (contentType === 'task') { // 🌟 תמיכה חדשה במשימות
+        return await adminModel.getAllTasksFromDB();
+    } else {
+        throw new Error('Invalid content type requested');
+    }
+};
+
 export const removeContent = async (contentType, contentId) => {
     let result;
     
@@ -41,6 +58,8 @@ export const removeContent = async (contentType, contentId) => {
         result = await adminModel.deleteBlogFromDB(contentId);
     } else if (contentType === 'video') {
         result = await adminModel.deleteVideoFromDB(contentId);
+    } else if (contentType === 'task') { // 🌟 תמיכה חדשה במשימות
+        result = await adminModel.deleteTaskFromDB(contentId);
     } else {
         throw new Error('Invalid content type');
     }

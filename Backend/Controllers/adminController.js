@@ -34,3 +34,24 @@ export const deleteContentController = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+// קונטרולר לקבלת כל המשתמשים
+export const getAllUsersController = async (req, res) => {
+    try {
+        const users = await adminService.getUsersList();
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+// קונטרולר לקבלת כל התוכן (בלוגים/סרטונים)
+export const getAllContentController = async (req, res) => {
+    try {
+        const { type } = req.params; // 'blog' או 'video'
+        const content = await adminService.getContentList(type);
+        res.status(200).json(content);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};

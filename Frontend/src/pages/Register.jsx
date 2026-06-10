@@ -146,8 +146,6 @@
 
 // export default Register;
 
-
-
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext"; 
@@ -201,10 +199,12 @@ const Register = () => {
 
             setSuccess("ההרשמה בוצעה בהצלחה! מנתב אותך למערכת...");
             
-            // ניתוב דינמי המבוסס על סוג התפקיד שהוחזר מהשרת
+            // תיקון הניתוב הדינמי: הוספת בדיקה עבור מאמן כושר
             setTimeout(() => {
                 if (response.role === "nutritionist") {
                     navigate("/nutritionist/dashboard");
+                } else if (response.role === "trainer") {
+                    navigate("/trainer/dashboard"); // ניתוב נכון למאמן
                 } else {
                     navigate("/client/dashboard");
                 }
@@ -245,7 +245,7 @@ const Register = () => {
                     placeholder="הזן שם מלא"
                 />
 
-                {/* שדה בחירת סוג משתמש (חדש) */}
+                {/* שדה בחירת סוג משתמש */}
                 <div style={{ marginBottom: "15px", display: "flex", flexDirection: "column", gap: "5px" }}>
                     <label style={{ fontWeight: "600", fontSize: "14px", textAlign: "right" }}>סוג חשבון:</label>
                     <select
@@ -265,6 +265,7 @@ const Register = () => {
                     >
                         <option value="client">מתאמן / לקוח</option>
                         <option value="nutritionist">תזונאי מוסמך</option>
+                        <option value="trainer">מאמן כושר</option>
                     </select>
                 </div>
 

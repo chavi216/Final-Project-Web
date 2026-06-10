@@ -30,6 +30,12 @@ import TrainerTasksPage from "./pages/Trainer/TrainerTasksPage";
 import TrainerBlogsPage from "./pages/Trainer/TrainerBlogsPage";
 import TrainerVideosPage from "./pages/Trainer/TrainerVideosPage";
 
+// 🌟 דפי אדמין (כאן הוספנו את הייבוא שהיה חסר!) 🌟
+import AdminUsersPage from "./pages/Admin/AdminUsersPage";
+import AdminTasksPage from "./pages/Admin/AdminTasksPage";
+import AdminBlogsPage from "./pages/Admin/AdminBlogsPage";
+import AdminVideosPage from "./pages/Admin/AdminVideosPage";
+
 import "./App.css";
 
 // 🌟 קומפוננטת מעטפת שמסדרת את ה-Layout רק עבור עמודים פנימיים מחוברים
@@ -182,6 +188,38 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={["trainer"]}>
               <DashboardLayout><TrainerBlogsPage /></DashboardLayout>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/dashboard" 
+          element={
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <DashboardLayout><AdminUsersPage /></DashboardLayout>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/tasks" 
+          element={
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <DashboardLayout><AdminTasksPage /></DashboardLayout>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/blogs" 
+          element={
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <DashboardLayout><AdminBlogsPage /></DashboardLayout>
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/videos" 
+          element={
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <DashboardLayout><AdminVideosPage /></DashboardLayout>
             </ProtectedRoute>
           } 
         />
