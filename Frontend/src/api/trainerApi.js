@@ -20,8 +20,6 @@ export const trainerApi = {
   deleteTask: (taskId) => fetchWithErrorHandling(`/trainer/tasks/${taskId}`, {
     method: 'DELETE',
   }),
-  getAllTasks: () =>
-    fetchWithErrorHandling('/trainer/all-tasks'),
 
   // --- בלוגים ---
   getBlogs: () => fetchWithErrorHandling('/trainer/blogs'),

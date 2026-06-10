@@ -7,7 +7,8 @@ import {
     trackClient, 
     sendMessage, 
     getClients,
-    getVideos
+    getVideos,
+    
 } from '../controllers/trainerController.js';
 
 import * as sharedTaskController from '../Controllers/sharedTaskController.js';

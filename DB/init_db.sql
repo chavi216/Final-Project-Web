@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS Blogs (
     FOREIGN KEY (recipient_client_id) REFERENCES Users(ID)
 );
 
+
 -- יצירת טבלת משימות
 CREATE TABLE IF NOT EXISTS  Tasks (
     Task_ID INT PRIMARY KEY AUTO_INCREMENT,
