@@ -1,6 +1,8 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { apiService } from '../../api/api';
 import Button from '../common/Button';
+import './styles/VideoManager.css'; // ייבוא קובץ העיצוב
 
 const VideoManager = ({ role }) => {
     const [title, setTitle] = useState('');
@@ -48,25 +50,53 @@ const VideoManager = ({ role }) => {
     };
 
     return (
-        <div style={{ padding: '20px', border: '1px solid #ddd', borderRadius: '8px' }}>
+        <div className="video-manager-container">
             <h3>🎬 העלאת סרטון כושר</h3>
-            <input type="text" placeholder="שם הסרטון" value={title} onChange={(e) => setTitle(e.target.value)} style={{ width: '100%', marginBottom: '15px', padding: '8px' }} />
-            <label>קהל יעד:</label>
-            <select value={audienceType} onChange={(e) => setAudienceType(e.target.value)} style={{ width: '100%', marginBottom: '15px', padding: '8px' }}>
+            
+            <input 
+                type="text" 
+                placeholder="שם הסרטון" 
+                value={title} 
+                onChange={(e) => setTitle(e.target.value)} 
+                className="video-manager-input" 
+            />
+            
+            <label className="video-manager-label">קהל יעד:</label>
+            <select 
+                value={audienceType} 
+                onChange={(e) => setAudienceType(e.target.value)} 
+                className="video-manager-select"
+            >
                 <option value="all">🌍 לכולם (ציבורי)</option>
                 <option value="my_clients">👥 לכל המטופלים שלי</option>
                 <option value="specific">👤 למטופל ספציפי</option>
             </select>
+            
             {audienceType === 'specific' && (
-                <select value={recipientClientId} onChange={(e) => setRecipientClientId(e.target.value)} style={{ width: '100%', marginBottom: '15px', padding: '8px' }}>
+                <select 
+                    value={recipientClientId} 
+                    onChange={(e) => setRecipientClientId(e.target.value)} 
+                    className="video-manager-select"
+                >
                     <option value="">-- בחר מטופל --</option>
                     {clients.map(c => <option key={c.ID} value={c.ID}>{c.name}</option>)}
                 </select>
             )}
-            <div onClick={() => fileInputRef.current.click()} style={{ padding: '20px', border: '2px dashed #aaa', textAlign: 'center', cursor: 'pointer', marginBottom: '15px' }}>
+            
+            <div 
+                onClick={() => fileInputRef.current.click()} 
+                className="video-manager-upload-box"
+            >
                 {file ? `נבחר: ${file.name}` : "לחצי כאן לבחירת סרטון מהתיקייה"}
-                <input ref={fileInputRef} type="file" accept="video/*" style={{ display: 'none' }} onChange={handleFileChange} />
+                <input 
+                    ref={fileInputRef} 
+                    type="file" 
+                    accept="video/*" 
+                    className="video-manager-hidden-input" 
+                    onChange={handleFileChange} 
+                />
             </div>
+            
             <Button onClick={handleUpload}>פרסם סרטון</Button>
         </div>
     );

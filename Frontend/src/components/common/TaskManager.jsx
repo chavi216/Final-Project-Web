@@ -1,6 +1,8 @@
+
 import React, { useState, useEffect } from 'react';
 import { apiService } from '../../api/api';
 import Button from './Button';
+import './styles/TaskManager.css'; // ייבוא של קובץ העיצוב החדש
 
 const TaskManager = ({ clientId, role }) => {
     const [tasks, setTasks] = useState([]);
@@ -62,17 +64,17 @@ const TaskManager = ({ clientId, role }) => {
     if (loading) return <div>טוען משימות...</div>;
 
     return (
-        <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '8px', border: '1px solid #ddd' }}>
-            <h3 style={{ marginTop: 0 }}>ניהול משימות למטופל</h3>
+        <div className="task-manager-container">
+            <h3 className="task-manager-title">ניהול משימות למטופל</h3>
             
-            <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
+            <form onSubmit={handleSubmit} className="task-form">
                 <input 
                     type="text" 
                     placeholder="כותרת המשימה" 
                     value={title} 
                     onChange={(e) => setTitle(e.target.value)} 
                     required 
-                    style={{ padding: '8px', flex: '1', minWidth: '150px' }}
+                    className="task-input task-input-title"
                 />
                 <input 
                     type="text" 
@@ -80,25 +82,29 @@ const TaskManager = ({ clientId, role }) => {
                     value={body} 
                     onChange={(e) => setBody(e.target.value)} 
                     required 
-                    style={{ padding: '8px', flex: '2', minWidth: '200px' }}
+                    className="task-input task-input-desc"
                 />
                 <Button type="submit">{editingTaskId ? 'עדכן משימה' : 'הוסף משימה'}</Button>
-                {editingTaskId && <Button type="button" onClick={() => { setEditingTaskId(null); setTitle(''); setBody(''); }}>בטל</Button>}
+                {editingTaskId && (
+                    <Button type="button" onClick={() => { setEditingTaskId(null); setTitle(''); setBody(''); }}>
+                        בטל
+                    </Button>
+                )}
             </form>
 
-            <ul style={{ listStyle: 'none', padding: 0 }}>
+            <ul className="task-list">
                 {tasks.length === 0 ? <li>אין משימות למטופל זה.</li> : tasks.map(task => (
-                    <li key={task.Task_ID} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', borderBottom: '1px solid #eee' }}>
+                    <li key={task.Task_ID} className="task-item">
                         <div>
                             <strong>{task.Title}</strong>
-                            <p style={{ margin: '5px 0 0', color: '#666', fontSize: '14px' }}>{task.Body}</p>
-                            <span style={{ fontSize: '12px', color: task.completed ? 'green' : 'orange' }}>
+                            <p className="task-item-desc">{task.Body}</p>
+                            <span className={`task-item-status ${task.completed ? 'status-completed' : 'status-pending'}`}>
                                 סטטוס: {task.completed ? 'בוצע' : 'ממתין לביצוע'}
                             </span>
                         </div>
-                        <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-                            <button onClick={() => handleEdit(task)} style={{ cursor: 'pointer', border: 'none', background: 'none', color: '#007bff' }}>✏️</button>
-                            <button onClick={() => handleDelete(task.Task_ID)} style={{ cursor: 'pointer', border: 'none', background: 'none', color: 'red' }}>🗑️</button>
+                        <div className="task-item-actions">
+                            <button onClick={() => handleEdit(task)} className="task-action-btn edit-btn">✏️</button>
+                            <button onClick={() => handleDelete(task.Task_ID)} className="task-action-btn delete-btn">🗑️</button>
                         </div>
                     </li>
                 ))}

@@ -1,6 +1,8 @@
+
 import React, { useState, useEffect } from 'react';
 import { apiService } from '../../api/api';
 import Button from './Button';
+import './styles/BlogManager.css'; // ייבוא של קובץ העיצוב החדש
 
 const BlogManager = ({ role }) => {
     const [blogs, setBlogs] = useState([]);
@@ -80,30 +82,30 @@ const BlogManager = ({ role }) => {
     if (loading) return <div>טוען מערכת בלוגים...</div>;
 
     return (
-        <div style={{ padding: '20px', backgroundColor: '#fff', borderRadius: '8px', border: '1px solid #ddd' }}>
+        <div className="blog-manager-container">
             <h3>{editingBlogId ? '📝 עריכת מאמר/בלוג' : '✍️ כתיבת מאמר/בלוג חדש'}</h3>
             
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginBottom: '30px' }}>
+            <form onSubmit={handleSubmit} className="blog-form">
                 <input 
                     type="text" 
                     placeholder="כותרת המאמר" 
                     value={title} 
                     onChange={(e) => setTitle(e.target.value)} 
                     required 
-                    style={{ padding: '10px', fontSize: '16px' }}
+                    className="blog-input"
                 />
                 <textarea 
                     placeholder="תוכן המאמר..." 
                     value={body} 
                     onChange={(e) => setBody(e.target.value)} 
                     required 
-                    style={{ padding: '10px', minHeight: '150px', fontSize: '15px', resize: 'vertical' }}
+                    className="blog-textarea"
                 />
 
-                <div style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
+                <div className="blog-audience-wrapper">
                     <div>
-                        <label style={{ fontWeight: 'bold', marginLeft: '8px' }}>קהל יעד:</label>
-                        <select value={audienceType} onChange={(e) => setAudienceType(e.target.value)} style={{ padding: '8px' }}>
+                        <label className="blog-label">קהל יעד:</label>
+                        <select value={audienceType} onChange={(e) => setAudienceType(e.target.value)} className="blog-select">
                             <option value="all">🌍 כל משתמשי המערכת (ציבורי)</option>
                             <option value="my_clients">👥 רק המטופלים שלי</option>
                             <option value="specific">👤 מטופל ספציפי בלבד</option>
@@ -113,12 +115,12 @@ const BlogManager = ({ role }) => {
                     {/* יוצג רק אם נבחר מטופל ספציפי */}
                     {audienceType === 'specific' && (
                         <div>
-                            <label style={{ fontWeight: 'bold', marginLeft: '8px' }}>בחר מטופל:</label>
+                            <label className="blog-label">בחר מטופל:</label>
                             <select 
                                 value={recipientClientId} 
                                 onChange={(e) => setRecipientClientId(e.target.value)} 
                                 required
-                                style={{ padding: '8px' }}
+                                className="blog-select"
                             >
                                 <option value="" disabled>-- בחר מטופל --</option>
                                 {clients.map(c => (
@@ -129,26 +131,30 @@ const BlogManager = ({ role }) => {
                     )}
                 </div>
 
-                <div style={{ display: 'flex', gap: '10px' }}>
+                <div className="blog-buttons-wrapper">
                     <Button type="submit">{editingBlogId ? 'עדכן והפץ' : 'פרסם מאמר'}</Button>
-                    {editingBlogId && <Button type="button" onClick={() => { setEditingBlogId(null); setTitle(''); setBody(''); setAudienceType('all'); }}>בטל עריכה</Button>}
+                    {editingBlogId && (
+                        <Button type="button" onClick={() => { setEditingBlogId(null); setTitle(''); setBody(''); setAudienceType('all'); }}>
+                            בטל עריכה
+                        </Button>
+                    )}
                 </div>
             </form>
 
             <hr />
             <h4>המאמרים שפרסמת בעבר:</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            <div className="blog-list">
                 {blogs.length === 0 ? <p>טרם פרסמת מאמרים.</p> : blogs.map(blog => (
-                    <div key={blog.blog_ID} style={{ border: '1px solid #eee', padding: '15px', borderRadius: '6px', backgroundColor: '#f9f9f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div key={blog.blog_ID} className="blog-item">
                         <div>
-                            <h5 style={{ margin: '0 0 5px 0', fontSize: '16px' }}>{blog.Title}</h5>
-                            <span style={{ fontSize: '12px', padding: '3px 8px', borderRadius: '12px', backgroundColor: '#e2e8f0', color: '#4a5568' }}>
+                            <h5 className="blog-item-title">{blog.Title}</h5>
+                            <span className="blog-item-tag">
                                 קהל יעד: {blog.audience_type === 'all' ? 'כל המערכת' : blog.audience_type === 'my_clients' ? 'הלקוחות שלי' : 'מטופל ספציפי'}
                             </span>
                         </div>
-                        <div style={{ display: 'flex', gap: '15px' }}>
-                            <button onClick={() => handleEdit(blog)} style={{ background: 'none', border: 'none', color: '#007bff', cursor: 'pointer' }}>✏️ ערוך</button>
-                            <button onClick={() => handleDelete(blog.blog_ID)} style={{ background: 'none', border: 'none', color: 'red', cursor: 'pointer' }}>🗑️ מחק</button>
+                        <div className="blog-item-actions">
+                            <button onClick={() => handleEdit(blog)} className="blog-action-btn edit-btn">✏️ ערוך</button>
+                            <button onClick={() => handleDelete(blog.blog_ID)} className="blog-action-btn delete-btn">🗑️ מחק</button>
                         </div>
                     </div>
                 ))}

@@ -1,0 +1,83 @@
+.task-manager-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.task-manager-title {
+    margin-top: 0;
+}
+
+.task-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.task-input {
+    padding: 8px;
+}
+
+.task-input-title {
+    flex: 1;
+    min-width: 150px;
+}
+
+.task-input-desc {
+    flex: 2;
+    min-width: 200px;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.task-item-desc {
+    margin: 5px 0 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.task-item-status {
+    font-size: 12px;
+}
+
+/* קלאסים דינמיים לסטטוס המשימה */
+.status-completed {
+    color: green;
+}
+
+.status-pending {
+    color: orange;
+}
+
+.task-item-actions {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.task-action-btn {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 16px;
+}
+
+.task-action-btn.edit-btn {
+    color: #007bff;
+}
+
+.task-action-btn.delete-btn {
+    color: red;
+}

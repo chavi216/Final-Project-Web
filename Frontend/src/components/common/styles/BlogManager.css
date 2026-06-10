@@ -1,0 +1,96 @@
+.blog-manager-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.blog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.blog-input {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.blog-textarea {
+    padding: 10px;
+    min-height: 150px;
+    font-size: 15px;
+    resize: vertical;
+}
+
+.blog-audience-wrapper {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.blog-label {
+    font-weight: bold;
+    margin-left: 8px; /* מותאם ל-RTL */
+}
+
+.blog-select {
+    padding: 8px;
+}
+
+.blog-buttons-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.blog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.blog-item {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.blog-item-title {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+}
+
+.blog-item-tag {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    background-color: #e2e8f0;
+    color: #4a5568;
+    display: inline-block;
+}
+
+.blog-item-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.blog-action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.blog-action-btn.edit-btn {
+    color: #007bff;
+}
+
+.blog-action-btn.delete-btn {
+    color: red;
+}
