@@ -2,10 +2,23 @@ import * as trainerModel from '../models/trainerModel.js';
 import * as sharedModel from '../models/sharedModel.js'; 
 
 export const handleAddVideo = async (videoData) => {
-    if (!videoData.title || !videoData.video_url) {
-        throw new Error('Title and Video URL are required');
+
+    if (!videoData.title) {
+        throw new Error('Title is required');
     }
-    return await trainerModel.createVideoInDB(videoData);
+
+    if (!videoData.file) {
+        throw new Error('Video file is required');
+    }
+
+    const dbVideo = {
+        From_ID: videoData.From_ID,
+        To_ID: videoData.To_ID,
+        title: videoData.title,
+        video_url: `/uploads/${videoData.file.filename}`
+    };
+
+    return await trainerModel.createVideoInDB(dbVideo);
 };
 
 export const handleUpdateVideo = async (video_ID, title, video_url) => {
@@ -47,4 +60,8 @@ export const handleAssignTask = async (taskData) => {
 export const handleGetClients = async (trainerId) => {
     if (!trainerId) throw new Error('Trainer ID is missing');
     return await trainerModel.getClientsByTrainerId(trainerId);
+};
+
+export const handleGetVideos = async () => {
+    return await trainerModel.getAllVideosFromDB();
 };

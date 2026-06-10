@@ -36,7 +36,7 @@ const ClientVideosPage = () => {
           {videos.map(video => (
             <VideoPlayer 
               key={video.video_ID} 
-              url={`${BASE_URL}/${video.video_url}`} 
+              url={`${BASE_URL}${video.video_url}`}
               title={video.title} 
             />
           ))}

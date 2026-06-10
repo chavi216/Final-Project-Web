@@ -20,6 +20,8 @@ export const trainerApi = {
   deleteTask: (taskId) => fetchWithErrorHandling(`/trainer/tasks/${taskId}`, {
     method: 'DELETE',
   }),
+  getAllTasks: () =>
+    fetchWithErrorHandling('/trainer/all-tasks'),
 
   // --- בלוגים ---
   getBlogs: () => fetchWithErrorHandling('/trainer/blogs'),
@@ -36,11 +38,10 @@ export const trainerApi = {
   }),
 
   // --- סרטוני כושר ---
-  getVideos: () => fetchWithErrorHandling('/trainer/videos'), // אם תצטרכי לשלוף
-  uploadVideo: (videoData) => fetchWithErrorHandling('/trainer/videos', {
+  uploadVideo: (formData) => fetchWithErrorHandling('/trainer/videos', {
     method: 'POST',
-    body: JSON.stringify(videoData),
-  }),
+    body: formData,
+}),
   updateVideo: (videoId, videoData) => fetchWithErrorHandling(`/trainer/videos/${videoId}`, {
     method: 'PUT',
     body: JSON.stringify(videoData),
@@ -48,4 +49,6 @@ export const trainerApi = {
   deleteVideo: (videoId) => fetchWithErrorHandling(`/trainer/videos/${videoId}`, {
     method: 'DELETE',
   }),
+  getVideos: () =>
+    fetchWithErrorHandling('/trainer/videos'),
 };

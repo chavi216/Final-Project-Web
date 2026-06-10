@@ -31,3 +31,20 @@ export const getClientsByTrainerId = async (trainerId) => {
     const [rows] = await db.query(query, [trainerId]);
     return rows;
 };
+
+export const getAllVideosFromDB = async () => {
+    const query = `
+        SELECT
+            fv.video_ID,
+            fv.title,
+            fv.video_url,
+            u.name AS client_name
+        FROM FitnessVideos fv
+        LEFT JOIN Users u
+            ON fv.To_ID = u.ID
+        ORDER BY fv.video_ID DESC
+    `;
+
+    const [rows] = await db.query(query);
+    return rows;
+};

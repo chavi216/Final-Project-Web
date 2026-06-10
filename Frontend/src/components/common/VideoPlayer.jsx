@@ -2,6 +2,7 @@ import React from 'react';
 import './styles/VideoPlayer.css';
 
 const VideoPlayer = ({ url, title }) => {
+  console.log("VIDEO URL:", url);
   if (!url) return <p className="no-video">לא נמצא קובץ וידאו זמין</p>;
 
   return (

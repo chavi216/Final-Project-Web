@@ -1,26 +1,48 @@
 import * as trainerService from '../services/trainerService.js';
 
+
+
 export const uploadVideo = async (req, res) => {
     try {
         const videoData = {
-            From_ID: req.user.ID, 
-            ...req.body
+            From_ID: req.user.ID,
+            To_ID: req.body.To_ID,
+            title: req.body.title,
+            file: req.file
         };
+
         await trainerService.handleAddVideo(videoData);
-        res.status(201).json({ message: 'Video uploaded successfully' });
+
+        res.status(201).json({
+            message: 'Video uploaded successfully'
+        });
+
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({
+            error: error.message
+        });
     }
 };
-
 export const updateVideo = async (req, res) => {
     try {
         const videoId = parseInt(req.params.id);
+
         const { title, video_url } = req.body;
-        await trainerService.handleUpdateVideo(videoId, title, video_url);
-        res.status(200).json({ message: 'Video updated successfully' });
+
+        await trainerService.handleUpdateVideo(
+            videoId,
+            title,
+            video_url
+        );
+
+        res.status(200).json({
+            message: 'Video updated successfully'
+        });
+
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({
+            error: error.message
+        });
     }
 };
 
@@ -84,6 +106,15 @@ export const getClients = async (req, res) => {
         const trainerId = req.user?.id || req.user?.ID;
         const clients = await trainerService.handleGetClients(trainerId);
         res.status(200).json(clients);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+export const getVideos = async (req, res) => {
+    try {
+        const videos = await trainerService.handleGetVideos();
+        res.status(200).json(videos);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

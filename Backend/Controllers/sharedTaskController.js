@@ -44,3 +44,24 @@ export const deleteTask = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+
+export const getAllTasks = async (req, res) => {
+    try {
+
+        const managerId =
+            req.user?.ID || req.user?.id;
+
+        const tasks =
+            await sharedModel.getAllManagerTasksFromDB(managerId);
+
+        res.status(200).json(tasks);
+
+    } catch (error) {
+
+        res.status(400).json({
+            error: error.message
+        });
+
+    }
+};

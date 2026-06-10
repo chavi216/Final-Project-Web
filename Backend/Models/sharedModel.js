@@ -37,6 +37,17 @@ export const deleteTaskFromDB = async (Task_ID) => {
     return result;
 };
 
+export const getAllManagerTasksFromDB = async (manager_ID) => {
+    const query = `
+        SELECT *
+        FROM Tasks
+        WHERE manager_ID = ?
+        ORDER BY Task_ID DESC
+    `;
+
+    const [rows] = await db.query(query, [manager_ID]);
+    return rows;
+};
 // --- בלוגים (מעודכן עם תמיכה בקהל יעד) ---
 
 // יצירת בלוג עם תמיכה בקהל יעד (כולם / לקוחות שלי / לקוח ספציפי)
