@@ -4,13 +4,12 @@ import {
     registerUserController, 
     deleteUserController, 
     deleteContentController,
-    getAllUsersController,     // ייבוא חדש שהיה חסר
-    getAllContentController    // ייבוא חדש שהיה חסר
+    getAllUsersController,     
+    getAllContentController    
 } from '../Controllers/adminController.js';
+console.log("ADMIN ROUTES LOADED");
+const router = express.Router(); 
 
-const router = express.Router(); // קודם כל מגדירים את הראוטר
-
-// כל הנתיבים בקובץ הזה ידרשו הרשאת אדמין (חובה לשים את זה לפני הנתיבים)
 router.use(verifyToken);
 router.use(isAdmin); 
 

@@ -2,11 +2,11 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors'; 
 
-import adminRoutes from './routes/adminRoutes.js'; 
+import adminRoutes from './Routes/adminRoutes.js';
 import nutritionistRoutes from './Routes/nutritionistRoutes.js';
-import trainerRoutes from './routes/trainerRoutes.js';
-import clientRoutes from './routes/clientRoutes.js';
-import authRoutes from './routes/authRoutes.js';
+import trainerRoutes from './Routes/trainerRoutes.js';
+import clientRoutes from './Routes/clientRoutes.js';
+import authRoutes from './Routes/authRoutes.js';
 
 dotenv.config();
 const app = express();
