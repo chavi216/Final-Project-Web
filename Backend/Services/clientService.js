@@ -43,3 +43,9 @@ export const handleGetProfessionals = async () => {
 export const handleUpdateTeam = async (client_ID, trainer_id, nutritionist_id) => {
     return await clientModel.updateClientTeamInDB(client_ID, trainer_id, nutritionist_id);
 };
+
+
+// הוספת פונקציה לעדכון תמונת הפרופיל בשירות
+export const handleUpdateProfileImage = async (client_ID, imageUrl) => {
+    return await clientModel.updateClientProfileImageInDB(client_ID, imageUrl);
+};

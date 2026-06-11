@@ -1,9 +1,9 @@
-INSERT INTO Users (ID, name, email, password, role, address, phone_number, trainer_id, nutritionist_id) VALUES
-(1, 'Admin System', 'admin@lifestyle.com', '$2a$10$gTYwCN66/tBRoCr3.TXa1.v1iyvwIF7GRBqxzv7G.AHLMt/owXrp.', 'admin', 'Tel Aviv, Israel', '050-0000000', NULL, NULL),
-(2, 'Tom Trainer', 'tom@lifestyle.com', '$2a$10$gTYwCN66/tBRoCr3.TXa1.v1iyvwIF7GRBqxzv7G.AHLMt/owXrp.', 'trainer', 'Haifa, Israel', '052-1111111', NULL, NULL),
-(3, 'Nina Nutrition', 'nina@lifestyle.com', '$2a$10$gTYwCN66/tBRoCr3.TXa1.v1iyvwIF7GRBqxzv7G.AHLMt/owXrp.', 'nutritionist', 'Jerusalem, Israel', '054-2222222', NULL, NULL),
-(4, 'Charlie Client', 'charlie@gmail.com', '$2a$10$gTYwCN66/tBRoCr3.TXa1.v1iyvwIF7GRBqxzv7G.AHLMt/owXrp.', 'client', 'Ramat Gan, Israel', '050-3333333', 2, 3),
-(5, 'Dana Diet', 'dana@gmail.com', '$2a$10$gTYwCN66/tBRoCr3.TXa1.v1iyvwIF7GRBqxzv7G.AHLMt/owXrp.', 'client', 'Ashdod, Israel', '053-4444444', 2, NULL);
+INSERT INTO Users (ID, name, email, password, role, address, phone_number, trainer_id, nutritionist_id, profile_image) VALUES
+(1, 'Admin System', 'admin@lifestyle.com', '$2a$10$gTYwCN66/tBRoCr3.TXa1.v1iyvwIF7GRBqxzv7G.AHLMt/owXrp.', 'admin', 'Tel Aviv, Israel', '050-0000000', NULL, NULL, NULL),
+(2, 'Tom Trainer', 'tom@lifestyle.com', '$2a$10$gTYwCN66/tBRoCr3.TXa1.v1iyvwIF7GRBqxzv7G.AHLMt/owXrp.', 'trainer', 'Haifa, Israel', '052-1111111', NULL, NULL, NULL),
+(3, 'Nina Nutrition', 'nina@lifestyle.com', '$2a$10$gTYwCN66/tBRoCr3.TXa1.v1iyvwIF7GRBqxzv7G.AHLMt/owXrp.', 'nutritionist', 'Jerusalem, Israel', '054-2222222', NULL, NULL, NULL),
+(4, 'Charlie Client', 'charlie@gmail.com', '$2a$10$gTYwCN66/tBRoCr3.TXa1.v1iyvwIF7GRBqxzv7G.AHLMt/owXrp.', 'client', 'Ramat Gan, Israel', '050-3333333', 2, 3, NULL),
+(5, 'Dana Diet', 'dana@gmail.com', '$2a$10$gTYwCN66/tBRoCr3.TXa1.v1iyvwIF7GRBqxzv7G.AHLMt/owXrp.', 'client', 'Ashdod, Israel', '053-4444444', 2, NULL, NULL);
 
 -- ===================================================
 -- 2. הכנסת מאמרים / בלוגים (Blogs)

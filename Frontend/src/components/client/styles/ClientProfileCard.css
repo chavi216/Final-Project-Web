@@ -40,3 +40,37 @@
     padding: 15px;
   }
 }
+/* עיצוב הראש של הכרטיס כדי שיהיה מיושר למרכז */
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* עיצוב תמונת הפרופיל (כשהיא קיימת) */
+.profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 2px solid #eef2f5;
+}
+
+/* עיגול האות (במידה ואין תמונה) */
+.profile-initials-circle {
+  width: 80px;
+  height: 80px;
+  background-color: #4285f4; /* הצבע הכחול של גוגל */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

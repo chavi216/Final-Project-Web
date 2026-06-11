@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS Users (
     phone_number VARCHAR(20),
     trainer_id INT DEFAULT NULL,
     nutritionist_id INT DEFAULT NULL,
-    -- שינוי: אם מאמן או תזונאי נמחקים ע"י האדמין, השדה אצל הלקוח פשוט מתאפס ל-NULL והלקוח לא נמחק
+    profile_image VARCHAR(255) DEFAULT NULL,
     FOREIGN KEY (trainer_id) REFERENCES Users(ID) ON DELETE SET NULL,
     FOREIGN KEY (nutritionist_id) REFERENCES Users(ID) ON DELETE SET NULL
 );

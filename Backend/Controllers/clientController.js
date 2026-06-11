@@ -122,3 +122,24 @@ export const updateTeam = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+export const uploadProfileImage = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ message: "לא נבחר קובץ להעלאה" });
+        }
+        
+        // יצירת הנתיב שיישמר בבסיס הנתונים (השרת מגיש את התיקייה הזו סטטית)
+        const imageUrl = `/uploads/${req.file.filename}`;
+        
+        // קריאה לשירות לעדכון ה-DB
+        await clientService.handleUpdateProfileImage(req.user.id, imageUrl);
+        
+        res.status(200).json({ 
+            message: 'תמונת הפרופיל עודכנה בהצלחה', 
+            imageUrl 
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
