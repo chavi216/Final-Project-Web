@@ -1,6 +1,79 @@
+// import React, { useContext, useEffect, useState } from 'react';
+// import { AuthContext } from '../../context/AuthContext';
+// import { apiService } from '../../api/api';
+
+// const NutritionistDashboardPage = () => {
+//     const { user } = useContext(AuthContext);
+//     const [stats, setStats] = useState({
+//         activeClients: 0,
+//         pendingTasks: 0, // יעודכן בעתיד מול השרת
+//         unreadMessages: 0 // יעודכן בעתיד מול השרת
+//     });
+
+//     useEffect(() => {
+//         const fetchDashboardData = async () => {
+//             try {
+//                 // מושך את הלקוחות האמיתיים כדי לספור אותם
+//                 const clients = await apiService.nutritionist.getClients();
+//                 setStats(prev => ({ 
+//                     ...prev, 
+//                     activeClients: clients.length 
+//                 }));
+//             } catch (error) {
+//                 console.error("שגיאה במשיכת נתוני דשבורד:", error);
+//             }
+//         };
+//         fetchDashboardData();
+//     }, []);
+
+//     return (
+//         <div style={{ padding: '10px' }}>
+//             <h2>שלום, {user?.name || 'תזונאי'} 👋</h2>
+//             <p style={{ color: '#666', marginBottom: '30px' }}>ברוך הבא ללוח הבקרה של התזונאי. הנה תמונת מצב להיום:</p>
+
+//             <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+//                 <div style={cardStyle}>
+//                     <h3>מטופלים פעילים</h3>
+//                     <p style={statNumberStyle}>{stats.activeClients}</p>
+//                 </div>
+//                 <div style={cardStyle}>
+//                     <h3>משימות פתוחות לביצוע</h3>
+//                     <p style={statNumberStyle}>{stats.pendingTasks}</p>
+//                 </div>
+//                 <div style={cardStyle}>
+//                     <h3>הודעות חדשות</h3>
+//                     <p style={statNumberStyle}>{stats.unreadMessages}</p>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+// const cardStyle = {
+//     flex: '1',
+//     minWidth: '200px',
+//     backgroundColor: '#fff',
+//     padding: '20px',
+//     borderRadius: '8px',
+//     boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+//     border: '1px solid #eee',
+//     textAlign: 'center'
+// };
+
+// const statNumberStyle = {
+//     fontSize: '32px',
+//     fontWeight: 'bold',
+//     color: '#007bff',
+//     margin: '10px 0 0 0'
+// };
+
+// export default NutritionistDashboardPage;
+
+
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { apiService } from '../../api/api';
+import './styles/NutritionistDashboard.css'; // ✅ ייבוא קובץ העיצוב החדש
 
 const NutritionistDashboardPage = () => {
     const { user } = useContext(AuthContext);
@@ -27,44 +100,28 @@ const NutritionistDashboardPage = () => {
     }, []);
 
     return (
-        <div style={{ padding: '10px' }}>
-            <h2>שלום, {user?.name || 'תזונאי'} 👋</h2>
-            <p style={{ color: '#666', marginBottom: '30px' }}>ברוך הבא ללוח הבקרה של התזונאי. הנה תמונת מצב להיום:</p>
+        <div className="nutritionist-dashboard-container">
+            <h2 className="nutritionist-dashboard-title">שלום, {user?.name || 'תזונאי'} 👋</h2>
+            <p className="nutritionist-dashboard-subtitle">
+                ברוך הבא ללוח הבקרה של התזונאי. הנה תמונת מצב להיום:
+            </p>
 
-            <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-                <div style={cardStyle}>
+            <div className="nutritionist-stats-grid">
+                <div className="nutritionist-stat-card">
                     <h3>מטופלים פעילים</h3>
-                    <p style={statNumberStyle}>{stats.activeClients}</p>
+                    <p className="nutritionist-stat-number">{stats.activeClients}</p>
                 </div>
-                <div style={cardStyle}>
+                <div className="nutritionist-stat-card">
                     <h3>משימות פתוחות לביצוע</h3>
-                    <p style={statNumberStyle}>{stats.pendingTasks}</p>
+                    <p className="nutritionist-stat-number">{stats.pendingTasks}</p>
                 </div>
-                <div style={cardStyle}>
+                <div className="nutritionist-stat-card">
                     <h3>הודעות חדשות</h3>
-                    <p style={statNumberStyle}>{stats.unreadMessages}</p>
+                    <p className="nutritionist-stat-number">{stats.unreadMessages}</p>
                 </div>
             </div>
         </div>
     );
-};
-
-const cardStyle = {
-    flex: '1',
-    minWidth: '200px',
-    backgroundColor: '#fff',
-    padding: '20px',
-    borderRadius: '8px',
-    boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
-    border: '1px solid #eee',
-    textAlign: 'center'
-};
-
-const statNumberStyle = {
-    fontSize: '32px',
-    fontWeight: 'bold',
-    color: '#007bff',
-    margin: '10px 0 0 0'
 };
 
 export default NutritionistDashboardPage;

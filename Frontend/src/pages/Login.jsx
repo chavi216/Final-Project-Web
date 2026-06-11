@@ -19,10 +19,10 @@
 //     setError("");
 //     setLoading(true);
 
-//    try {
+//     try {
 //       const response = await apiService.auth.login({ email, password });
-//       localStorage.setItem('userID', response.id);
-//       if (response.id) { // וודאי שהשרת מחזיר id
+      
+//       if (response.id) { 
 //         localStorage.setItem('userID', response.id);
 //       }
       
@@ -30,20 +30,18 @@
 //         token: response.token,
 //         role: response.role,
 //         name: response.name,
-//         id: response.id // כדאי להעביר גם ל-context
+//         id: response.id 
 //       });
 
 //       if (response.role === "client") {
 //         navigate("/client/dashboard");
-//      } 
-//      else if (response.role === 'trainer') {  // <--- את השורה הזו צריך להוסיף
+//       } else if (response.role === 'trainer') { 
 //         navigate('/trainer/dashboard');
 //       } else if (response.role === "nutritionist") {
-//         navigate("/nutritionist/dashboard"); // ניתוב לאזור האישי של התזונאי
+//         navigate("/nutritionist/dashboard"); 
 //       } else if (response.role === "admin") {
 //         navigate("/admin/dashboard");
-//       }
-
+//       } else {
 //         setError("סוג משתמש זה אינו נתמך במערכת.");
 //       }
 //     } catch (err) {
@@ -94,13 +92,13 @@
 
 // export default Login;
 
-
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom"; 
 import { AuthContext } from "../context/AuthContext";
 import { apiService } from "../api/api";
 import Input from "../components/common/Input";
 import Button from "../components/common/Button";
+import './Styles/Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -149,12 +147,12 @@ const Login = () => {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "50px auto", padding: "20px", border: "1px solid #ccc", borderRadius: "8px" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>התחברות למערכת</h2>
+    <div className="login-container">
+      <h2 className="login-title">התחברות למערכת</h2>
       
-      {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+      {error && <p className="login-error">{error}</p>}
       
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="login-form">
         <Input
           label="כתובת אימייל:"
           type="email"
@@ -173,15 +171,15 @@ const Login = () => {
           placeholder="Enter your password"
         />
 
-        <div style={{ marginTop: "25px" }}>
+        <div className="login-button-wrapper">
           <Button type="submit" disabled={loading}>
             {loading ? "מתחבר..." : "התחבר"}
           </Button>
         </div>
       </form>
 
-      <p style={{ textAlign: "center", marginTop: "20px", fontSize: "14px" }}>
-        משתמש חדש במערכת? <Link to="/register" style={{ color: "#007bff", textDecoration: "none", fontWeight: "bold" }}>צור חשבון חדש כאן</Link>
+      <p className="login-footer">
+        משתמש חדש במערכת? <Link to="/register" className="login-link">צור חשבון חדש כאן</Link>
       </p>
     </div>
   );

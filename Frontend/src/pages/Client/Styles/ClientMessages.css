@@ -1,0 +1,238 @@
+/* Frontend/src/pages/Client/styles/ClientMessages.css */
+
+.client-messages-container {
+    padding: 20px;
+    height: 85vh; /* שומר שהצ'אט לא יגלוש מהמסך */
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.client-messages-title {
+    margin-bottom: 15px;
+    color: var(--text-dark, #333);
+}
+
+/* המעטפת של כל הצ'אט (רשימה + חלון שיחה) */
+.client-messages-layout {
+    display: flex;
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* --- אזור אנשי הקשר (צד ימין) --- */
+.client-contacts-sidebar {
+    width: 30%;
+    border-left: 1px solid #ddd;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+}
+
+.client-contacts-header {
+    padding: 15px;
+    background-color: #ebebeb;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+}
+
+.client-contacts-list {
+    overflow-y: auto;
+    flex: 1;
+}
+
+.client-contact-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.client-contact-item:hover {
+    background-color: #f1f3f5;
+}
+
+.client-contact-item.active {
+    background-color: #e9ecef;
+}
+
+.client-contact-avatar {
+    font-size: 24px;
+}
+
+.client-contact-name {
+    font-weight: bold;
+    font-size: 15px;
+    color: #333;
+}
+
+.client-contact-role {
+    font-size: 13px;
+    color: #666;
+}
+
+/* --- אזור חלון השיחה (צד שמאל) --- */
+.client-chat-area {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    background-color: #e5ddd5; /* צבע רקע קלאסי של צ'אט */
+}
+
+.client-chat-empty {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    color: #888;
+    text-align: center;
+    padding: 20px;
+}
+
+.client-chat-header {
+    padding: 15px;
+    background-color: #ebebeb;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.client-chat-history {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* בועות צ'אט */
+.chat-bubble {
+    padding: 8px 12px;
+    border-radius: 8px;
+    max-width: 70%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.chat-bubble.me {
+    align-self: flex-end; /* נצמד לשמאל / כיוון השפה */
+    background-color: #dcf8c6; /* ירוק בהיר */
+}
+
+.chat-bubble.them {
+    align-self: flex-start; /* נצמד לימין / כיוון השפה */
+    background-color: #fff; /* לבן */
+}
+
+.chat-bubble-text {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.chat-bubble-time {
+    font-size: 10px;
+    color: #888;
+    text-align: left;
+    margin-top: 5px;
+}
+
+/* אזור הקלדת הודעה */
+.client-chat-input-area {
+    padding: 15px;
+    background-color: #f0f0f0;
+}
+
+.client-chat-form {
+    display: flex;
+    gap: 10px;
+}
+
+.client-chat-input {
+    flex: 1;
+    padding: 12px 15px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 1rem;
+}
+
+.client-chat-input:focus {
+    border-color: #007bff;
+}
+
+.client-chat-submit {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.client-chat-submit:disabled {
+    background-color: #a0cbf7;
+    cursor: not-allowed;
+}
+
+.client-chat-submit:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+/* --- רספונסיביות למובייל --- */
+@media (max-width: 768px) {
+    .client-messages-container {
+        padding: 10px;
+        height: calc(100vh - 80px); /* התאמה לגובה המסך בנייד עם תפריט */
+    }
+
+    .client-messages-layout {
+        flex-direction: column; /* מסדר אותם אחד מעל השני במקום זה לצד זה */
+    }
+
+    .client-contacts-sidebar {
+        width: 100%;
+        border-left: none;
+        border-bottom: 1px solid #ddd;
+        flex: none; /* שלא יתפוס גובה אוטומטי */
+    }
+
+    .client-contacts-header {
+        display: none; /* חוסך מקום בנייד */
+    }
+
+    .client-contacts-list {
+        display: flex;
+        flex-direction: row; /* הופך לשורת גלילה אופקית */
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .client-contact-item {
+        border-bottom: none;
+        padding: 10px;
+        border-radius: 8px;
+        background-color: #fff;
+        border: 1px solid #eee;
+        min-width: 160px; /* רוחב מינימלי כדי שלא יימעך */
+    }
+
+    .client-chat-area {
+        width: 100%;
+        flex: 1; /* תופס את שאר גובה המסך */
+    }
+}
