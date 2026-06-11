@@ -53,3 +53,5 @@ router.put('/blogs/:blogId', sharedBlogController.updateBlog);
 router.delete('/blogs/:blogId', sharedBlogController.deleteBlog);
 
 export default router;
+
+
