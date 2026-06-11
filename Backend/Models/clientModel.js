@@ -1,16 +1,19 @@
 // import db from '../config/db.js';
 
-// // export const getClientInfoFromDB = async (client_ID) => {
-// //     const query = `SELECT ID, name, email, role, address, phone_number FROM Users WHERE ID = ?`;
-// //     const [rows] = await db.query(query, [client_ID]);
-// //     return rows[0];
-// // };
-
 // export const getClientInfoFromDB = async (client_ID) => {
-//     // הוספנו את trainer_id ואת nutritionist_id לשורת ה-SELECT
-//     const query = `SELECT ID, name, email, role, address, phone_number, trainer_id, nutritionist_id FROM Users WHERE ID = ?`;
+//     // שינוי profile_image_url ל-profile_image (אפשר להוסיף AS profile_image_url אם הפרונטאנד מצפה לזה)
+//     const query = `SELECT ID, name, email, role, address, phone_number, trainer_id, nutritionist_id, profile_image 
+//                    FROM Users WHERE ID = ?`;
 //     const [rows] = await db.query(query, [client_ID]);
 //     return rows[0];
+// };
+
+
+// export const updateClientProfileImageInDB = async (client_ID, imageUrl) => {
+//     // שינוי profile_image_url ל-profile_image
+//     const query = `UPDATE Users SET profile_image = ? WHERE ID = ?`;
+//     const [result] = await db.query(query, [imageUrl, client_ID]);
+//     return result;
 // };
 
 // export const getClientVideosFromDB = async (client_ID) => {
@@ -32,13 +35,9 @@
 // };
 
 // export const updateTaskCompletionInDB = async (Task_ID, client_ID, completed) => {
-//     // הפיכה מפורשת למספר: 0 או 1
 //     const val = completed ? 1 : 0; 
-    
-//     // שאילתה פשוטה
 //     const query = `UPDATE Tasks SET completed = ? WHERE Task_ID = ? AND client_ID = ?`;
     
-//     // הדפסה לדיבוג - תראי בטרמינל מה השרת באמת מנסה לעדכן
 //     console.log("SQL DEBUG: Updating Task", Task_ID, "for Client", client_ID, "to", val);
     
 //     const [result] = await db.query(query, [val, Task_ID, client_ID]);
@@ -55,33 +54,34 @@
 //     return messages;
 // };
 
-// // שליפת כל אנשי המקצוע במערכת (מאמנים ותזונאים)
 // export const getProfessionalsFromDB = async () => {
 //     const query = `SELECT ID, name, role FROM Users WHERE role IN ('trainer', 'nutritionist')`;
 //     const [rows] = await db.query(query);
 //     return rows;
 // };
 
-// // עדכון המאמן והתזונאי של הלקוח
 // export const updateClientTeamInDB = async (client_ID, trainer_id, nutritionist_id) => {
 //     const query = `UPDATE Users SET trainer_id = ?, nutritionist_id = ? WHERE ID = ?`;
 //     const [result] = await db.query(query, [trainer_id, nutritionist_id, client_ID]);
 //     return result;
 // };
 
-import db from '../config/db.js';
 
-// שליפת פרטי הלקוח כולל תמונת פרופיל
+import db from '../config/db.js';
+import fs from 'fs/promises';
+import path from 'path';
+
 export const getClientInfoFromDB = async (client_ID) => {
-    const query = `SELECT ID, name, email, role, address, phone_number, trainer_id, nutritionist_id, profile_image_url 
+    // שינוי profile_image_url ל-profile_image
+    const query = `SELECT ID, name, email, role, address, phone_number, trainer_id, nutritionist_id, profile_image 
                    FROM Users WHERE ID = ?`;
     const [rows] = await db.query(query, [client_ID]);
     return rows[0];
 };
 
-// עדכון נתיב תמונת הפרופיל ב-DB
 export const updateClientProfileImageInDB = async (client_ID, imageUrl) => {
-    const query = `UPDATE Users SET profile_image_url = ? WHERE ID = ?`;
+    // שינוי profile_image_url ל-profile_image
+    const query = `UPDATE Users SET profile_image = ? WHERE ID = ?`;
     const [result] = await db.query(query, [imageUrl, client_ID]);
     return result;
 };
@@ -93,9 +93,25 @@ export const getClientVideosFromDB = async (client_ID) => {
 };
 
 export const getAllBlogsFromDB = async () => {
+    // SELECT * שולף גם את ה-file_path שהוספנו
     const query = `SELECT * FROM Blogs ORDER BY blog_ID DESC`;
     const [rows] = await db.query(query);
-    return rows;
+
+    // רצים על כל הבלוגים וקוראים את התוכן מהקובץ אם הוא קיים
+    const blogsWithContent = await Promise.all(rows.map(async (blog) => {
+        try {
+            if (blog.file_path) {
+                const fullPath = path.join(process.cwd(), blog.file_path);
+                const textContent = await fs.readFile(fullPath, 'utf-8');
+                return { ...blog, body: textContent };
+            }
+        } catch (fileError) {
+            console.error(`שגיאה בקריאת הקובץ עבור בלוג ${blog.blog_ID}:`, fileError.message);
+        }
+        return { ...blog, body: blog.body || "התוכן לא זמין כעת." };
+    }));
+
+    return blogsWithContent;
 };
 
 export const getClientFoodPlanFromDB = async (client_ID) => {
