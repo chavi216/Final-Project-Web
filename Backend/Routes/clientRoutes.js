@@ -34,7 +34,6 @@
 // router.get('/messages/:contactId', getMessages);
 
 // export default router;
-
 import express from 'express';
 import { verifyToken, isClient } from '../Middleware/authMiddleware.js';
 import { 
@@ -48,12 +47,12 @@ const router = express.Router();
 
 console.log("Client Routes file loaded successfully!");
 
-// 1. הנתיב של העלאת תמונה - הגדרה תקינה לחלוטין
-router.post('/upload-image', verifyToken, uploadVideoFile.single('profileImage'), uploadProfileImage);
-
-// 2. כל שאר הנתיבים המאובטחים
+// 1. מחילים את ה-Middleware על כל הנתיבים הבאים
 router.use(verifyToken);
 router.use(isClient); 
+
+// 2. הגדרת הנתיבים (כולל העלאת התמונה כעת נמצאת תחת המטריה של המאומתים)
+router.post('/upload-image', uploadVideoFile.single('profileImage'), uploadProfileImage);
 
 router.get('/info', getInfo);
 router.get('/videos', getVideos);

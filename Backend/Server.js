@@ -19,6 +19,10 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/nutritionist', nutritionistRoutes);
 app.use('/api/trainer', trainerRoutes);
 app.use('/api/client', clientRoutes);
+app.use((req, res, next) => {
+    console.log(`[DEBUG] Received request: ${req.method} ${req.url}`);
+    next();
+});
 app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
