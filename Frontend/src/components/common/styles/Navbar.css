@@ -1,3 +1,5 @@
+/* Navbar.css - גרסה רספונסיבית */
+
 .navbar {
   height: 60px;
   background-color: #ffffff;
@@ -7,6 +9,7 @@
   align-items: center;
   padding: 0 20px;
   direction: rtl;
+  width: 100%; /* מוודא שרוחב ה-Navbar תמיד תקין */
 }
 
 .navbar-logo a {
@@ -14,6 +17,7 @@
   font-weight: bold;
   color: #333;
   text-decoration: none;
+  white-space: nowrap; /* מונע מהלוגו להתפצל לשורות */
 }
 
 .user-menu {
@@ -25,6 +29,10 @@
 .user-welcome {
   font-size: 14px;
   color: #555;
+  white-space: nowrap; /* מונע מהשם להתקפל */
+  overflow: hidden;
+  text-overflow: ellipsis; /* מוסיף שלוש נקודות אם השם ארוך מדי */
+  max-width: 120px; /* הגבלה כדי שלא ידחוף את הכפתורים החוצה */
 }
 
 .logout-btn {
@@ -35,27 +43,25 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
+  white-space: nowrap;
 }
 
-.logout-btn:hover {
-  background-color: #f5c6cb;
-}
-
-.login-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: 500;
-}
+/* התאמה למובייל */
 @media (max-width: 768px) {
   .navbar {
     padding: 0 10px;
   }
   .user-welcome {
-    display: none;
+    display: none; /* מסתיר את השם כדי לפנות מקום */
   }
 }
+
 @media (max-width: 480px) {
   .navbar-logo a {
     font-size: 16px;
+  }
+  .logout-btn {
+    padding: 5px 8px; /* כפתור קטן יותר למסכים ממש קטנים */
+    font-size: 12px;
   }
 }

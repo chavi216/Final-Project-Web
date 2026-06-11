@@ -1,3 +1,5 @@
+/* Button.css - גרסה רספונסיבית */
+
 .custom-btn {
   padding: 10px 20px;
   font-size: 16px;
@@ -6,6 +8,19 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
   font-weight: 500;
+  
+  /* מונע מהכפתור להישבר לשורות מוזרות */
+  white-space: nowrap; 
+}
+
+/* התאמה למובייל */
+@media (max-width: 480px) {
+  .custom-btn {
+    padding: 12px 24px; /* הגדלת אזור הלחיצה למובייל */
+    font-size: 14px;
+    width: 100%; /* במובייל, כפתור פעולה בדרך כלל תופס רוחב מלא */
+    text-align: center;
+  }
 }
 
 .custom-btn.primary {

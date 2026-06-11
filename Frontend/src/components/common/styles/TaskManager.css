@@ -1,33 +1,25 @@
+/* TaskManager.css - גרסה רספונסיבית */
+
 .task-manager-container {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     border: 1px solid #ddd;
-}
-
-.task-manager-title {
-    margin-top: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .task-form {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* מאפשר לטופס לרדת שורה במובייל */
 }
 
+/* שדות קלט גמישים */
 .task-input {
     padding: 8px;
-}
-
-.task-input-title {
-    flex: 1;
-    min-width: 150px;
-}
-
-.task-input-desc {
-    flex: 2;
-    min-width: 200px;
+    flex: 1 1 200px; /* גמישות: יתפוס מקום, אבל לא ירד מתחת ל-200px */
 }
 
 .task-list {
@@ -40,6 +32,13 @@
     justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid #eee;
+    gap: 10px;
+    flex-wrap: wrap; /* מאפשר לטקסט ולכפתורים להסתדר יפה במובייל */
+}
+
+.task-item-content {
+    flex: 1;
+    min-width: 200px;
 }
 
 .task-item-desc {
@@ -50,34 +49,25 @@
 
 .task-item-status {
     font-size: 12px;
-}
-
-/* קלאסים דינמיים לסטטוס המשימה */
-.status-completed {
-    color: green;
-}
-
-.status-pending {
-    color: orange;
+    margin-bottom: 5px;
 }
 
 .task-item-actions {
     display: flex;
     gap: 10px;
-    align-items: flex-start;
+    align-items: center;
 }
 
-.task-action-btn {
-    cursor: pointer;
-    border: none;
-    background: none;
-    font-size: 16px;
-}
-
-.task-action-btn.edit-btn {
-    color: #007bff;
-}
-
-.task-action-btn.delete-btn {
-    color: red;
+/* התאמה למובייל */
+@media (max-width: 480px) {
+    .task-item {
+        flex-direction: column; /* הצגה של משימה כבלוק אחד */
+        align-items: flex-start;
+    }
+    
+    .task-item-actions {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 5px;
+    }
 }

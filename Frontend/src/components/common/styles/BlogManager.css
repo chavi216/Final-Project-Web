@@ -1,8 +1,13 @@
+/* BlogManager.css - גרסה רספונסיבית */
+
 .blog-manager-container {
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     border: 1px solid #ddd;
+    width: 100%; /* מוודא שלא יחרוג מהמסך */
+    max-width: 1000px; /* הגבלה לרוחב נוח במסכים גדולים */
+    margin: 0 auto;
 }
 
 .blog-form {
@@ -12,43 +17,23 @@
     margin-bottom: 30px;
 }
 
-.blog-input {
+.blog-input, .blog-textarea {
+    width: 100%; /* רוחב מלא במובייל */
     padding: 10px;
     font-size: 16px;
+    box-sizing: border-box; /* קריטי כדי שה-Padding לא יוציא את השדה מהמסך */
 }
 
 .blog-textarea {
-    padding: 10px;
     min-height: 150px;
-    font-size: 15px;
     resize: vertical;
 }
 
 .blog-audience-wrapper {
     display: flex;
-    gap: 20px;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.blog-label {
-    font-weight: bold;
-    margin-left: 8px; /* מותאם ל-RTL */
-}
-
-.blog-select {
-    padding: 8px;
-}
-
-.blog-buttons-wrapper {
-    display: flex;
-    gap: 10px;
-}
-
-.blog-list {
-    display: flex;
-    flex-direction: column;
     gap: 15px;
+    align-items: center;
+    flex-wrap: wrap; /* מעביר שורה אם אין מקום */
 }
 
 .blog-item {
@@ -59,25 +44,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
+    flex-wrap: wrap; /* חשוב מאוד: מאפשר לטקסט ולכפתורים לרדת שורה במובייל */
 }
 
-.blog-item-title {
-    margin: 0 0 5px 0;
-    font-size: 16px;
-}
-
-.blog-item-tag {
-    font-size: 12px;
-    padding: 3px 8px;
-    border-radius: 12px;
-    background-color: #e2e8f0;
-    color: #4a5568;
-    display: inline-block;
-}
-
-.blog-item-actions {
-    display: flex;
-    gap: 15px;
+/* התאמה לתוכן הפריט בבלוג במובייל */
+@media (max-width: 600px) {
+    .blog-item {
+        flex-direction: column; /* הצגת הכותרת והפעולות אחד מתחת לשני */
+        align-items: flex-start;
+    }
+    
+    .blog-item-actions {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
 }
 
 .blog-action-btn {
@@ -85,12 +67,5 @@
     border: none;
     cursor: pointer;
     font-size: 14px;
-}
-
-.blog-action-btn.edit-btn {
-    color: #007bff;
-}
-
-.blog-action-btn.delete-btn {
-    color: red;
+    padding: 8px; /* הגדלתי מעט את אזור הלחיצה למובייל */
 }

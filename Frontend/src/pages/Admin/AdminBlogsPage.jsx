@@ -80,7 +80,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { apiService } from '../../api/api';
-import '.Styles/AdminBlogs.css'; // ✅ ייבוא קובץ העיצוב החדש
+import './Styles/AdminBlogs.css'; // ✅ ייבוא קובץ העיצוב החדש
 
 const AdminBlogsPage = () => {
   const [blogs, setBlogs] = useState([]);

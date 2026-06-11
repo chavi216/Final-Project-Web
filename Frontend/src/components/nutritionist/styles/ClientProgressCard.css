@@ -1,3 +1,5 @@
+/* ClientProgressCard.css - גרסה רספונסיבית */
+
 .progress-card {
     background-color: #fff;
     padding: 20px;
@@ -5,25 +7,21 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     border: 1px solid #eee;
     margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box; /* חשוב למניעת גלילה אופקית */
 }
 
 .progress-card-title {
     margin: 0 0 10px 0;
     color: #333;
-    fontSize: 18px;
-}
-
-.progress-card-divider {
-    border: 0;
-    border-top: 1px solid #eee;
-    margin-bottom: 15px;
+    font-size: 18px; /* תיקנתי את השם ל-font-size (היה fontSize בשגיאת כתיב) */
 }
 
 .progress-card-grid {
     display: flex;
     justify-content: space-around;
     gap: 15px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* מאפשר לבלוקים לרדת שורה במסכים קטנים */
 }
 
 .progress-info-block {
@@ -31,29 +29,24 @@
     flex-direction: column;
     align-items: center;
     background-color: #f8f9fa;
-    padding: 10px 20px;
+    padding: 10px 15px;
     border-radius: 6px;
-    min-width: 120px;
-}
-
-.progress-info-label {
-    font-size: 12px;
-    color: #666;
-    margin-bottom: 5px;
+    flex: 1 1 120px; /* גמישות: יתפוס מקום אך לא יקטן מ-120px */
 }
 
 .progress-info-value {
-    font-size: 20px;
+    font-size: 18px; /* מעט הקטנה כדי שייכנס בנוחות במסכים צרים */
     font-weight: bold;
     color: #28a745;
 }
 
-.progress-empty-state {
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    border: 1px dashed #ccc;
-    text-align: center;
-    color: #666;
-    margin-bottom: 20px;
+/* התאמה למובייל */
+@media (max-width: 480px) {
+    .progress-card {
+        padding: 15px;
+    }
+    
+    .progress-info-block {
+        padding: 8px 10px;
+    }
 }

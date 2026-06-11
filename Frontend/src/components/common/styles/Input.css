@@ -1,7 +1,10 @@
+/* Input.css - גרסה רספונסיבית */
+
 .input-group {
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;
+  width: 100%; /* מוודא שהקבוצה תופסת את כל הרוחב הזמין */
 }
 
 .input-label {
@@ -19,6 +22,8 @@
   border-radius: 4px;
   outline: none;
   text-align: right;
+  width: 100%;       /* רוחב מלא בתוך ה-input-group */
+  box-sizing: border-box; /* חשוב מאוד: מונע מה-padding להוציא את השדה מחוץ למסגרת */
 }
 
 .custom-input:focus {
@@ -34,4 +39,12 @@
   font-size: 12px;
   margin-top: 5px;
   text-align: right;
+}
+
+/* התאמה למובייל */
+@media (max-width: 480px) {
+  .custom-input {
+    font-size: 16px; /* מונע מה-iOS לעשות Zoom אוטומטי כשלוחצים על ה-input */
+    padding: 12px;   /* מרווח נוח יותר ללחיצה באצבע */
+  }
 }

@@ -229,7 +229,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { apiService } from '../../api/api';
-import './Styles/AdminDashboard.css'; // ✅ ייבוא קובץ העיצוב החדש
+import './Styles/AdminBlogs.css'// ✅ ייבוא קובץ העיצוב החדש
 
 const AdminDashboardPage = () => {
   const [activeTab, setActiveTab] = useState('users'); // 'users' | 'blogs' | 'videos'

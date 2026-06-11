@@ -1,22 +1,12 @@
-
+/* Sidebar.css */
 .sidebar {
   width: 240px;
   background-color: #2c3e50;
   color: white;
-  min-height: calc(100vh - 60px);
+  min-height: 100vh;
   padding: 20px 0;
   direction: rtl;
-}
-
-.sidebar-header {
-  padding: 0 20px 15px 20px;
-  border-bottom: 1px solid #34495e;
-  margin-bottom: 15px;
-}
-
-.sidebar-header h4 {
-  margin: 0;
-  color: #ecf0f1;
+  flex-shrink: 0; /* מונע מהסיידבר להתכווץ בתוך הפלקס */
 }
 
 .sidebar-menu {
@@ -33,100 +23,36 @@
   transition: all 0.2s ease;
 }
 
-.sidebar-menu li a:hover {
-  background-color: #34495e;
-  color: white;
-}
-
+.sidebar-menu li a:hover, 
 .sidebar-menu li a.active {
-  background-color: #1abc9c;
-  color: white;
-  font-weight: bold;
-}
-
-/* --- סגנונות שהוצאו מקומפוננטת האדמין --- */
-
-.admin-link {
-  display: block;
-  padding: 10px 20px !important; /* שומר על הריווח המדויק שהגדרת thủ אינליין */
-}
-
-.admin-details {
-  cursor: pointer;
-}
-
-.admin-summary {
-  display: block;
-  padding: 12px 20px;
-  font-weight: bold;
-  color: #bdc3c7;
-  transition: all 0.2s ease;
-}
-
-.admin-summary:hover {
   background-color: #34495e;
   color: white;
 }
 
-.admin-submenu {
-  list-style-type: none;
-  padding: 0;
-  padding-right: 15px;
-  margin-top: 5px;
-}
-
-.admin-submenu li {
-  margin-bottom: 8px;
-}
-
-.admin-submenu li a {
-  padding: 8px 20px; /* פדינג מעט עדין יותר בשביל תתי-תפריטים פנימיים */
-}
-
-/* --- מדיה קווריז להתאמה למובייל וטאבלטים --- */
-
+/* --- התאמות למובייל --- */
 @media (max-width: 768px) {
   .sidebar {
-    width: 100%;
+    width: 100% !important;
     min-height: auto;
-    padding: 10px;
+    padding: 10px 0;
   }
+  
   .sidebar-menu {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 5px;
   }
+  
   .sidebar-menu li {
     flex: 1 1 auto;
   }
+  
   .sidebar-menu li a {
-    padding: 8px 10px;
-    font-size: 13px;
-    text-align: center;
-    white-space: nowrap;
+    padding: 10px 15px;
+    font-size: 14px;
   }
-  /* התאמת אלמנט הפתיחה במובייל */
-  .admin-summary {
-    padding: 8px 10px;
-    font-size: 13px;
-    text-align: center;
-  }
-  .admin-submenu {
-    display: flex;
-    gap: 5px;
-    padding-right: 0;
-    justify-content: center;
-    width: 100%;
-    margin-top: 5px;
-  }
-}
 
-@media (max-width: 480px) {
-  .sidebar-menu li {
-    flex: 1 1 100%;
-  }
   .admin-submenu {
-    flex-direction: column;
+    display: none; /* במובייל לעיתים עדיף להסתיר תתי תפריטים או להציג אותם בשורה */
   }
 }

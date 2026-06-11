@@ -1,3 +1,5 @@
+/* Modal.css - גרסה רספונסיבית */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -9,6 +11,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 10px; /* מוודא שה-modal לא ייצמד לקצוות במסך קטן */
 }
 
 .modal-content {
@@ -17,6 +20,8 @@
   border-radius: 8px;
   width: 100%;
   max-width: 500px;
+  max-height: 90vh; /* מונע מהמודל לחרוג מגובה המסך */
+  overflow-y: auto;  /* מאפשר גלילה אם התוכן ארוך מדי */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   direction: rtl;
 }
@@ -32,6 +37,7 @@
 
 .modal-header h3 {
   margin: 0;
+  font-size: 1.2rem;
 }
 
 .close-btn {
@@ -40,6 +46,7 @@
   font-size: 24px;
   cursor: pointer;
   color: #aaa;
+  padding: 5px; /* הגדלת אזור הלחיצה למובייל */
 }
 
 .close-btn:hover {
@@ -48,4 +55,14 @@
 
 .modal-body {
   padding-top: 5px;
+}
+
+/* התאמה למובייל */
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 15px;
+  }
+  .close-btn {
+    font-size: 28px; /* כפתור סגירה גדול יותר נוח לאצבע */
+  }
 }
